@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,6 +16,19 @@ public class CellBlock : MonoBehaviour
         {
             renderer.color = curColor;
         }
+    }
+
+    public List<Vector2Int> GetThisBlockState()
+    {
+        var returnValue = new List<Vector2Int>();
+        var cols = GetComponentsInChildren<BoxCollider2D>();
+        foreach (var col in cols)
+        {
+            var pos = MainGameLogic.ChangeTilePosToPos(col.transform.localPosition,true);
+            returnValue.Add(pos);
+        }
+
+        return returnValue;
     }
 
     [ContextMenu("ApplyCustomColor")]
