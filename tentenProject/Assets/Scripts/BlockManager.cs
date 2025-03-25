@@ -28,7 +28,9 @@ public class BlockManager : MonoBehaviour
         foreach (var curParent in blockParent)
         {
             var randNum = Random.Range(0, cellBlockPool.Count);
-            curCellBlocks.Add(Instantiate(cellBlockPool[randNum], curParent));
+            var obj = Instantiate(cellBlockPool[randNum], curParent);
+            obj.transform.Rotate(new Vector3(0, 0, Random.Range(0, 4) * 90));
+            curCellBlocks.Add(obj);
         }
     }
 }

@@ -11,7 +11,7 @@ public class MainGameLogic : MonoBehaviour
     [SerializeField] private GameObject tileMap;
 
     public CellInfo[,] cellInfos = new CellInfo[10, 10];
-    
+
     public class CellInfo
     {
         public BoxCollider2D cellCol;
@@ -88,7 +88,7 @@ public class MainGameLogic : MonoBehaviour
 
         if (col.collider == null || !col.collider.GetComponentInParent<CellBlock>()) return;
         nowPickBlock = col.collider.GetComponentInParent<CellBlock>();
-        nowPickBlock.transform.DOScale(2, 0.2f).SetEase(Ease.InOutBounce);
+        nowPickBlock.transform.DOScale(2, 0.1f).SetEase(Ease.InOutBounce);
     }
 
     private void BlockDrop()
@@ -98,6 +98,7 @@ public class MainGameLogic : MonoBehaviour
 
         if (col.collider == null)
         {
+            nowPickBlock?.transform.DOKill();
             CurBlockReset();
             return;
         }
@@ -197,7 +198,8 @@ public class MainGameLogic : MonoBehaviour
                             isBlockPlacedImpossible = false;
                         }
                     }
-                    if(isBlockPlacedImpossible == false)
+
+                    if (isBlockPlacedImpossible == false)
                         return;
                 }
             }
@@ -249,23 +251,41 @@ public class MainGameLogic : MonoBehaviour
         return new Vector2(startXPos + pos.x * xyPos, startYPos + pos.y * -xyPos);
     }
 
-    public static Vector2Int ChangeTilePosToPos(Vector2 tilePos, bool isBlock = false)
+    public static Vector2Int ChangeBlockPosToPos(Vector2 blockPos, float rotation)
+    {
+        var toIntRot = Mathf.RoundToInt(rotation);
+        Debug.Log($"toIntRot: {toIntRot}  rotation: {rotation}");
+
+        var xyTilePos = 0.55f;
+        var xPos = Mathf.RoundToInt((blockPos.x / xyTilePos));
+        var yPos = Mathf.RoundToInt(blockPos.y / xyTilePos);
+
+        Vector2Int newPos = new Vector2Int(xPos, yPos);
+
+        if (toIntRot % 90 == 0)
+        {
+            newPos.x = yPos;
+            newPos.y = xPos;
+        }
+        if (toIntRot % 180 == 0)
+        {
+            newPos.x = -newPos.x;
+            newPos.y = -newPos.y;
+        }
+        
+        return new Vector2Int(xPos, -yPos);
+    }
+
+    public static Vector2Int ChangeTilePosToPos(Vector2 tilePos)
     {
         var startTileXPos = -2.5f;
         var startTileYPos = 2.5f;
-        if (isBlock)
-        {
-            startTileXPos = 0;
-            startTileYPos = 0;
-        }
 
         var xyTilePos = 0.55f;
 
         var xPos = Mathf.RoundToInt(((tilePos.x - startTileXPos) / xyTilePos));
         var yPos = Mathf.RoundToInt((tilePos.y - startTileYPos) / xyTilePos);
-        if (isBlock)
-            return new Vector2Int(xPos, -yPos);
-        else
-            return new Vector2Int(Mathf.Abs(xPos), Mathf.Abs(yPos));
+
+        return new Vector2Int(Mathf.Abs(xPos), Mathf.Abs(yPos));
     }
 }

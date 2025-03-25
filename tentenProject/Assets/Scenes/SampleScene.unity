@@ -5737,10 +5737,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -14368,18 +14368,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellBlockPool:
+  - {fileID: 5516192413822932864, guid: be85617293de57246b1ef4f5c74ae5fb, type: 3}
+  - {fileID: 5516192413822932864, guid: 47eee2d938541584f9b401aef9a6d779, type: 3}
+  - {fileID: 5516192413822932864, guid: d66d2d20a8e5561429e2fc0371aa5ad8, type: 3}
+  - {fileID: 5516192413822932864, guid: f2684bf18a37afa489fd05fc1ed8a879, type: 3}
   - {fileID: 5516192413822932864, guid: 5db0f944553d3874c82a2717827ecde5, type: 3}
+  - {fileID: 5516192413822932864, guid: af1d768e433c2c8408a601283fa8e5dc, type: 3}
   - {fileID: 5516192413822932864, guid: fc8b520e5a20d9f458fb22b7e02ca789, type: 3}
-  - {fileID: 5516192413822932864, guid: 8a5eb7f5bf2f8b543bddc87ed8edd681, type: 3}
   - {fileID: 5516192413822932864, guid: a4361458cadbe174cae473cc2529d6aa, type: 3}
   - {fileID: 5516192413822932864, guid: 1a435e6950aac894e910a49741d95a5c, type: 3}
-  - {fileID: 5516192413822932864, guid: af1d768e433c2c8408a601283fa8e5dc, type: 3}
-  - {fileID: 5516192413822932864, guid: be85617293de57246b1ef4f5c74ae5fb, type: 3}
   curCellBlocks: []
   blockParent:
   - {fileID: 6690640864619313720}
   - {fileID: 5399147209601008247}
   - {fileID: 5399147209353755319}
+  cellBlocksSampleList:
+  - {fileID: 5516192413822932864, guid: be85617293de57246b1ef4f5c74ae5fb, type: 3}
+  - {fileID: 5516192413822932864, guid: 47eee2d938541584f9b401aef9a6d779, type: 3}
+  - {fileID: 5516192413822932864, guid: d66d2d20a8e5561429e2fc0371aa5ad8, type: 3}
+  - {fileID: 5516192413822932864, guid: f2684bf18a37afa489fd05fc1ed8a879, type: 3}
+  - {fileID: 5516192413822932864, guid: 5db0f944553d3874c82a2717827ecde5, type: 3}
+  - {fileID: 5516192413822932864, guid: af1d768e433c2c8408a601283fa8e5dc, type: 3}
+  - {fileID: 5516192413822932864, guid: fc8b520e5a20d9f458fb22b7e02ca789, type: 3}
+  - {fileID: 5516192413822932864, guid: a4361458cadbe174cae473cc2529d6aa, type: 3}
+  - {fileID: 5516192413822932864, guid: 1a435e6950aac894e910a49741d95a5c, type: 3}
 --- !u!1 &2131071603
 GameObject:
   m_ObjectHideFlags: 0

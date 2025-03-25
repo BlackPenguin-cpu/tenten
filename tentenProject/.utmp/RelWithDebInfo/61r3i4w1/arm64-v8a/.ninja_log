@@ -1,0 +1,12 @@
+# ninja log v5
+665	1353	7627929114599309	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	9e617143ead53c10
+1357	2320	7627929123350959	C:/Users/User/tenten/tentenProject/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/61r3i4w1/obj/arm64-v8a/libswappywrapper.so	194fce3d95631c24
+185	2495	7627929126067252	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	20dd0481fe2aa8c4
+2	2591	7627929127137484	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	2ec9c3dbc1cc1017
+336	2740	7627929128606468	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	e066ba0427ccb6f5
+50	2767	7627929128921757	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	df4febfd60ab0b65
+545	2860	7627929129837138	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	54af362182f21a96
+480	3009	7627929131373268	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	cb6f879f69593b82
+398	3249	7627929133819461	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	94ea66a6356f69cc
+123	3401	7627929135325466	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	6b69e44af52cd58
+3401	3764	7627929138924764	C:/Users/User/tenten/tentenProject/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/61r3i4w1/obj/arm64-v8a/libgame.so	2aebe120bc3c7723

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,36 +9,36 @@ public class CellBlock : MonoBehaviour
 
     private void Start()
     {
-        if (curColor == Color.white)
-            curColor = Random.ColorHSV(0.5f, 1, 1, 1, 0.5f, 1);
+        SetBlockColor();
+    }
 
-        var renderers = GetComponentsInChildren<SpriteRenderer>();
-        foreach (var renderer in renderers)
-        {
-            renderer.color = curColor;
-        }
+    private void SetBlockColor()
+    {
+        if (curColor == Color.white)
+            SetRandomColor();
+
+        BlockColorChange();
+    }
+
+    private void SetRandomColor()
+    {
+        curColor = Random.ColorHSV(0.5f, 1, 1, 1, 0.5f, 1);
     }
 
     public List<Vector2Int> GetThisBlockState()
     {
-        var returnValue = new List<Vector2Int>();
         var cols = GetComponentsInChildren<BoxCollider2D>();
-        foreach (var col in cols)
-        {
-            var pos = MainGameLogic.ChangeTilePosToPos(col.transform.localPosition,true);
-            returnValue.Add(pos);
-        }
 
-        return returnValue;
+        return  cols.Select(col => MainGameLogic.ChangeBlockPosToPos(col.transform.localPosition, transform.eulerAngles.z)).ToList();
     }
 
     [ContextMenu("ApplyCustomColor")]
-    private void ColorChange()
+    private void BlockColorChange()
     {
         var renderers = GetComponentsInChildren<SpriteRenderer>();
-        foreach (var renderer in renderers)
+        foreach (var curRen in renderers)
         {
-            renderer.color = curColor;
-        } 
+            curRen.color = curColor;
+        }
     }
 }
