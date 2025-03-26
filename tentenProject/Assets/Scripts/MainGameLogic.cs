@@ -251,29 +251,36 @@ public class MainGameLogic : MonoBehaviour
         return new Vector2(startXPos + pos.x * xyPos, startYPos + pos.y * -xyPos);
     }
 
-    public static Vector2Int ChangeBlockPosToPos(Vector2 blockPos, float rotation)
+    public static Vector2Int ChangeBlockPosToPos(Vector2 blockPos, int rotNum)
     {
-        var toIntRot = Mathf.RoundToInt(rotation);
-        Debug.Log($"toIntRot: {toIntRot}  rotation: {rotation}");
-
         var xyTilePos = 0.55f;
         var xPos = Mathf.RoundToInt((blockPos.x / xyTilePos));
         var yPos = Mathf.RoundToInt(blockPos.y / xyTilePos);
-
         Vector2Int newPos = new Vector2Int(xPos, yPos);
 
-        if (toIntRot % 90 == 0)
+
+        if (rotNum == 1)
         {
-            newPos.x = yPos;
             newPos.y = xPos;
+            newPos.x = -yPos;
         }
-        if (toIntRot % 180 == 0)
+
+        if (rotNum == 3)
         {
-            newPos.x = -newPos.x;
-            newPos.y = -newPos.y;
+            newPos.y = -xPos;
+            newPos.x = yPos;
         }
-        
-        return new Vector2Int(xPos, -yPos);
+
+        if (rotNum == 2)
+        {
+            newPos.x = -xPos;
+            newPos.y = -yPos;
+        }
+
+        Debug.Log($" blockPos: {blockPos} newPos: {newPos} rotNum: {rotNum}");
+
+
+        return new Vector2Int(newPos.x, -newPos.y);
     }
 
     public static Vector2Int ChangeTilePosToPos(Vector2 tilePos)

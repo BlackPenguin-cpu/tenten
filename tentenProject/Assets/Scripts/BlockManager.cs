@@ -29,7 +29,8 @@ public class BlockManager : MonoBehaviour
         {
             var randNum = Random.Range(0, cellBlockPool.Count);
             var obj = Instantiate(cellBlockPool[randNum], curParent);
-            obj.transform.Rotate(new Vector3(0, 0, Random.Range(0, 4) * 90));
+            obj.rotNum = Random.Range(0, 4);
+            obj.transform.Rotate(new Vector3(0, 0, obj.rotNum * 90));
             curCellBlocks.Add(obj);
         }
     }

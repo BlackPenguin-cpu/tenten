@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class CellBlock : MonoBehaviour
 {
     public Color curColor;
-
+    public int rotNum = 0;
     private void Start()
     {
         SetBlockColor();
@@ -29,7 +29,7 @@ public class CellBlock : MonoBehaviour
     {
         var cols = GetComponentsInChildren<BoxCollider2D>();
 
-        return  cols.Select(col => MainGameLogic.ChangeBlockPosToPos(col.transform.localPosition, transform.eulerAngles.z)).ToList();
+        return  cols.Select(col => MainGameLogic.ChangeBlockPosToPos(col.transform.localPosition, rotNum)).ToList();
     }
 
     [ContextMenu("ApplyCustomColor")]
