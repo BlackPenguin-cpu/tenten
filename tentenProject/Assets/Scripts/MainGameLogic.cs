@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class MainGameLogic : MonoBehaviour
 {
@@ -128,12 +125,12 @@ public class MainGameLogic : MonoBehaviour
             info.cellCol.GetComponent<SpriteRenderer>().color = nowPickBlock.curColor;
         }
 
-        BlockManager.instance.curCellBlocks.Remove(nowPickBlock);
+        BlockManager.instance.ingameCellBlocks.Remove(nowPickBlock);
         Destroy(nowPickBlock.gameObject);
         nowPickBlock = null;
 
-        FailCheck();
         BlockClearCheck();
+        FailCheck();
     }
 
     private void BlockClearCheck()
@@ -174,12 +171,12 @@ public class MainGameLogic : MonoBehaviour
 
     private void FailCheck()
     {
-        var blockList = BlockManager.instance.curCellBlocks;
+        var blockList = BlockManager.instance.ingameCellBlocks;
+        bool isBlockPlacedImpossible = false;
         foreach (var block in blockList)
         {
             if (block == null) continue;
             var blockStates = block.GetThisBlockState();
-            bool isBlockPlacedImpossible = false;
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
@@ -203,12 +200,12 @@ public class MainGameLogic : MonoBehaviour
                         return;
                 }
             }
+        }
 
-            if (isBlockPlacedImpossible)
-            {
-                GameOver();
-                return;
-            }
+        if (isBlockPlacedImpossible)
+        {
+            GameOver();
+            return;
         }
     }
 
@@ -276,9 +273,6 @@ public class MainGameLogic : MonoBehaviour
             newPos.x = -xPos;
             newPos.y = -yPos;
         }
-
-        Debug.Log($" blockPos: {blockPos} newPos: {newPos} rotNum: {rotNum}");
-
 
         return new Vector2Int(newPos.x, -newPos.y);
     }
