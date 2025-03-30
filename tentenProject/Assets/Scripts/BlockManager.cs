@@ -9,9 +9,21 @@ using Random = UnityEngine.Random;
 public class BlockManager : MonoBehaviour
 {
     public static BlockManager instance;
-     public List<CellBlock> blockPool = new List<CellBlock>();
+    public List<BlockInfo> blockPool = new List<BlockInfo>();
     public List<CellBlock> ingameCellBlocks;
     public Transform[] blockParent = new Transform[3];
+
+    public struct BlockInfo
+    {
+        public int blockNum;
+        public int rotNum;
+
+        public BlockInfo(int blockNum, int rotNum)
+        {
+            this.blockNum = blockNum;
+            this.rotNum = rotNum;
+        }
+    }
 
     [SerializeField] private List<CellBlock> curCellBlockPool;
 
@@ -33,9 +45,13 @@ public class BlockManager : MonoBehaviour
         {
             if (blockPool.Count <= 0)
                 BlockQueueRefill();
-            var block = blockPool[Random.Range(0, blockPool.Count)];
-            var obj = Instantiate(block, curParent);
-            Debug.Log(obj.rotNum);
+            
+            var randNum = Random.Range(0, blockPool.Count);
+            var curBlockInfo = blockPool[randNum];
+            blockPool.RemoveAt(randNum);
+            
+            var obj = Instantiate(curCellBlockPool[curBlockInfo.blockNum], curParent);
+            obj.rotNum = curBlockInfo.rotNum;
             obj.transform.Rotate(new Vector3(0, 0, obj.rotNum * 90));
             ingameCellBlocks.Add(obj);
         }
@@ -45,14 +61,13 @@ public class BlockManager : MonoBehaviour
     {
         blockPool.Clear();
 
-        blockPool.Add(curCellBlockPool[0]);
-        blockPool.Add(curCellBlockPool[0]);
+        blockPool.Add(new BlockInfo(0, 0));
+        blockPool.Add(new BlockInfo(0, 0));
         for (int i = 1; i < curCellBlockPool.Count; i++)
         {
             for (int j = 0; j < 4; j++)
             {
-                var curBlock = Instantiate( curCellBlockPool[i]);
-                curBlock.rotNum = j;
+                var curBlock = new BlockInfo(i, j);
                 blockPool.Add(curBlock);
             }
         }

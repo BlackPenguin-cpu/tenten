@@ -7,6 +7,10 @@ public class CellBlock : MonoBehaviour
 {
     public Color curColor;
     public int rotNum = 0;
+
+    public CellBlock()
+    {
+    }
     private void Start()
     {
         SetBlockColor();
