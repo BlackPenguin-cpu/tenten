@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class MainGameLogic : MonoBehaviour
 {
+    public static MainGameLogic instance;
     [SerializeField] private GameObject tileMap;
 
     public CellInfo[,] cellInfos = new CellInfo[10, 10];
@@ -19,6 +21,11 @@ public class MainGameLogic : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject gameOverImg;
     private int score;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -91,6 +98,10 @@ public class MainGameLogic : MonoBehaviour
     private void BlockDrop()
     {
         var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        BlockDrop(pos);
+    }
+    private void BlockDrop(Vector3 pos)
+    {
         var col = Physics2D.Raycast(pos, Vector3.forward, 100, 1 << LayerMask.NameToLayer("Tilemap"));
 
         if (col.collider == null)
