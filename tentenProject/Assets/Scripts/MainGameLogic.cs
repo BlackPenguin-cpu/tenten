@@ -17,10 +17,11 @@ public class MainGameLogic : MonoBehaviour
         public bool isBlockPlaced = false;
     }
 
-    private CellBlock nowPickBlock;
+    public CellBlock nowPickBlock { get; private set; }
+
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject gameOverImg;
-    private int score;
+    public int score;
 
     private void Awake()
     {
@@ -91,8 +92,13 @@ public class MainGameLogic : MonoBehaviour
         var col = Physics2D.Raycast(pos, Vector3.forward, 100, 1 << LayerMask.NameToLayer("CellBlock"));
 
         if (col.collider == null || !col.collider.GetComponentInParent<CellBlock>()) return;
-        nowPickBlock = col.collider.GetComponentInParent<CellBlock>();
+        PickBlockSet(col.collider.GetComponentInParent<CellBlock>());
         nowPickBlock.transform.DOScale(2, 0.1f).SetEase(Ease.InOutBounce);
+    }
+
+    public void PickBlockSet(CellBlock block)
+    {
+        nowPickBlock = block;
     }
 
     private void BlockDrop()
@@ -100,7 +106,8 @@ public class MainGameLogic : MonoBehaviour
         var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         BlockDrop(pos);
     }
-    private void BlockDrop(Vector3 pos)
+
+    public bool BlockDrop(Vector2 pos)
     {
         var col = Physics2D.Raycast(pos, Vector3.forward, 100, 1 << LayerMask.NameToLayer("Tilemap"));
 
@@ -108,7 +115,7 @@ public class MainGameLogic : MonoBehaviour
         {
             nowPickBlock?.transform.DOKill();
             CurBlockReset();
-            return;
+            return false;
         }
 
         var vec = ChangeTilePosToPos(col.transform.position);
@@ -123,7 +130,7 @@ public class MainGameLogic : MonoBehaviour
                 || cellInfos[targetPos.x, targetPos.y].isBlockPlaced == true)
             {
                 CurBlockReset();
-                return;
+                return false;
             }
 
             infos.Add(cellInfos[targetPos.x, targetPos.y]);
@@ -142,6 +149,7 @@ public class MainGameLogic : MonoBehaviour
 
         BlockClearCheck();
         FailCheck();
+        return true;
     }
 
     private void BlockClearCheck()
@@ -180,7 +188,7 @@ public class MainGameLogic : MonoBehaviour
         }
     }
 
-    private void FailCheck()
+    public bool FailCheck()
     {
         var blockList = BlockManager.instance.ingameCellBlocks;
         bool isBlockPlacedImpossible = false;
@@ -208,16 +216,14 @@ public class MainGameLogic : MonoBehaviour
                     }
 
                     if (isBlockPlacedImpossible == false)
-                        return;
+                        return false;
                 }
             }
         }
 
-        if (isBlockPlacedImpossible)
-        {
-            GameOver();
-            return;
-        }
+        //isBlockPlacedImpossible 
+        GameOver();
+        return true;
     }
 
     private void GameOver()
@@ -254,7 +260,6 @@ public class MainGameLogic : MonoBehaviour
         var startXPos = -2.5f;
         var startYPos = 2.5f;
         var xyPos = 0.55f;
-
 
         return new Vector2(startXPos + pos.x * xyPos, startYPos + pos.y * -xyPos);
     }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TenTenAI : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class TenTenAI : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        EvolutionLearning();
     }
 
     private void Update()
@@ -68,10 +74,75 @@ public class TenTenAI : MonoBehaviour
         }
     }
 
-    private void EvoultionLearning()
+    private void EvolutionLearning()
     {
         var mainLogicInstance = MainGameLogic.instance;
-        
-        mainLogicInstance.
+    }
+
+    [System.Serializable]
+    private struct EvolutionData
+    {
+        public List<ActionData> placePositionList;
+        public int score;
+
+        [System.Serializable]
+        public struct ActionData
+        {
+            public int blockType;
+            public int blockRot;
+            public Vector2Int placePositionList;
+
+            public ActionData(int blockType, int blockRot, Vector2Int placePositionList)
+            {
+                this.blockType = blockType;
+                this.blockRot = blockRot;
+                this.placePositionList = placePositionList;
+            }
+        }
+
+        public EvolutionData(List<ActionData> placePositionList, int score)
+        {
+            this.placePositionList = placePositionList;
+            this.score = score;
+        }
+    }
+
+    private EvolutionData EvolutionFirstStart()
+    {
+        var mainLogicInstance = MainGameLogic.instance;
+        List<Vector2Int> posData = new List<Vector2Int>();
+        int nowPickBlockNum = 0;
+
+        while (!mainLogicInstance.FailCheck())
+        {
+            mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks[nowPickBlockNum]);
+
+            Vector2 parseToTilePos;
+            Vector2Int curVec;
+            do
+            {
+                var randNumX = Mathf.RoundToInt(Random.Range(0, 10));
+                var randNumY = Mathf.RoundToInt(Random.Range(0, 10));
+                curVec = new Vector2Int(randNumX, randNumY);
+                parseToTilePos = MainGameLogic.ChangePosToTilePos(curVec);
+            } while (!mainLogicInstance.BlockDrop(parseToTilePos));
+
+            nowPickBlockNum++;
+            if (nowPickBlockNum >= 3)
+                nowPickBlockNum = 0;
+
+            posData.Add(curVec);
+        }
+
+        List<EvolutionData.ActionData> actionDataList = new List<EvolutionData.ActionData>();
+        foreach (var curPos in posData)
+        {
+            var nowPickBlockData = mainLogicInstance.nowPickBlock;
+            actionDataList.Add(new EvolutionData.ActionData(nowPickBlockData.blockNum, nowPickBlockData.rotNum,
+                curPos));
+        }
+
+        var returnData = new EvolutionData(actionDataList, mainLogicInstance.score);
+        return returnData;
     }
 }

@@ -57,6 +57,7 @@ public class BlockManager : MonoBehaviour
             var curBlock = blockQueue.Dequeue();
             var obj = Instantiate(curCellBlockPool[curBlock.blockNum], curParent);
             
+            obj.blockNum = curBlock.blockNum;
             obj.rotNum = curBlock.rotNum;
             obj.transform.Rotate(new Vector3(0, 0, obj.rotNum * 90));
             ingameCellBlocks.Add(obj);
