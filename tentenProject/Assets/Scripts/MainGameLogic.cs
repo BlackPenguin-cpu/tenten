@@ -9,7 +9,27 @@ public class MainGameLogic : MonoBehaviour
     public static MainGameLogic instance;
     [SerializeField] private GameObject tileMap;
 
-    public CellInfo[,] cellInfos = new CellInfo[10, 10];
+    private CellInfo[,] cellInfos = new CellInfo[10, 10];
+
+    public CellInfo[,] CellInfos
+    {
+        get
+        {
+            if (cellInfos == null)
+            {
+                
+                for (int i = 0; i < 10; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        cellInfos[i, j] = new CellInfo();
+                    }
+                }
+            }
+            return cellInfos;
+        }
+        set { cellInfos = value; }
+    }
 
     public class CellInfo
     {
@@ -30,25 +50,13 @@ public class MainGameLogic : MonoBehaviour
 
     private void Start()
     {
-        CellInfoInit();
         GetTileMap();
     }
 
     private void Update()
     {
-        InputFunc();
+        UpdateInput();
         scoreText.text = $"Score: {score}";
-    }
-
-    private void CellInfoInit()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            for (int j = 0; j < 10; j++)
-            {
-                cellInfos[i, j] = new CellInfo();
-            }
-        }
     }
 
     private void GetTileMap()
@@ -67,7 +75,7 @@ public class MainGameLogic : MonoBehaviour
         }
     }
 
-    private void InputFunc()
+    private void UpdateInput()
     {
         if (Input.GetMouseButtonDown(0))
             BlockPicking();
@@ -91,7 +99,7 @@ public class MainGameLogic : MonoBehaviour
         var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         var col = Physics2D.Raycast(pos, Vector3.forward, 100, 1 << LayerMask.NameToLayer("CellBlock"));
 
-        if (col.collider == null || !col.collider.GetComponentInParent<CellBlock>()) return;
+        if (!col.collider || !col.collider.GetComponentInParent<CellBlock>()) return;
         PickBlockSet(col.collider.GetComponentInParent<CellBlock>());
         nowPickBlock.transform.DOScale(2, 0.1f).SetEase(Ease.InOutBounce);
     }
@@ -154,37 +162,37 @@ public class MainGameLogic : MonoBehaviour
 
     private void BlockClearCheck()
     {
-        var HorClearBlockList = new List<CellInfo>();
-        var VerClearBlockList = new List<CellInfo>();
+        var horClearBlockList = new List<CellInfo>();
+        var verClearBlockList = new List<CellInfo>();
         for (int j = 0; j < 10; j++)
         {
             for (int i = 0; i < 10; i++)
             {
                 if (cellInfos[j, i].isBlockPlaced == true)
                 {
-                    HorClearBlockList.Add(cellInfos[j, i]);
+                    horClearBlockList.Add(cellInfos[j, i]);
                 }
 
                 if (cellInfos[i, j].isBlockPlaced == true)
                 {
-                    VerClearBlockList.Add(cellInfos[i, j]);
+                    verClearBlockList.Add(cellInfos[i, j]);
                 }
             }
 
-            if (HorClearBlockList.Count >= 10)
+            if (horClearBlockList.Count >= 10)
             {
-                BlockClear(HorClearBlockList);
+                BlockClear(horClearBlockList);
                 BlockClearCheck();
             }
 
-            if (VerClearBlockList.Count >= 10)
+            if (verClearBlockList.Count >= 10)
             {
-                BlockClear(VerClearBlockList);
+                BlockClear(verClearBlockList);
                 BlockClearCheck();
             }
 
-            HorClearBlockList.Clear();
-            VerClearBlockList.Clear();
+            horClearBlockList.Clear();
+            verClearBlockList.Clear();
         }
     }
 
@@ -221,9 +229,13 @@ public class MainGameLogic : MonoBehaviour
             }
         }
 
-        //isBlockPlacedImpossible 
-        GameOver();
-        return true;
+        if (isBlockPlacedImpossible)
+        {
+            GameOver();
+            return true;
+        }
+
+        return false;
     }
 
     private void GameOver()
@@ -239,12 +251,12 @@ public class MainGameLogic : MonoBehaviour
         {
             block.isBlockPlaced = false;
             var target = block.cellCol.transform;
-            target.DORotate(360 * Vector3.forward, 0.4f);
-            target.DOScale(0, 0.4f).onComplete = () =>
-            {
-                target.GetComponent<SpriteRenderer>().color = Color.white;
-                target.DOScale(0.5f, 0.1f);
-            };
+            // target.DORotate(360 * Vector3.forward, 0.4f);
+            // target.DOScale(0, 0.4f).onComplete = () =>
+            // {
+            target.GetComponent<SpriteRenderer>().color = Color.white;
+            //     target.DOScale(0.5f, 0.1f);
+            // };
         }
     }
 

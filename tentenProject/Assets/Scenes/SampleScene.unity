@@ -12105,6 +12105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1782683174}
+  - component: {fileID: 1782683175}
   m_Layer: 7
   m_Name: TileMap
   m_TagString: Untagged
@@ -12137,6 +12138,119 @@ Transform:
   - {fileID: 1305405623}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1782683175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782683173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd84077832c30541b087fd4f47ab741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellList:
+  - {fileID: 2136816504}
+  - {fileID: 493737402}
+  - {fileID: 679815483}
+  - {fileID: 1879436074}
+  - {fileID: 61620179}
+  - {fileID: 1379724334}
+  - {fileID: 507042846}
+  - {fileID: 606793231}
+  - {fileID: 1879324839}
+  - {fileID: 1284508447}
+  - {fileID: 661549709}
+  - {fileID: 1446859451}
+  - {fileID: 507634571}
+  - {fileID: 847845438}
+  - {fileID: 1520791792}
+  - {fileID: 1997006449}
+  - {fileID: 1450131838}
+  - {fileID: 540610472}
+  - {fileID: 137672567}
+  - {fileID: 1097602223}
+  - {fileID: 310858846}
+  - {fileID: 1401115234}
+  - {fileID: 356589700}
+  - {fileID: 1567769060}
+  - {fileID: 609001792}
+  - {fileID: 1101063301}
+  - {fileID: 1731586530}
+  - {fileID: 970462201}
+  - {fileID: 946584658}
+  - {fileID: 426240668}
+  - {fileID: 509864497}
+  - {fileID: 1248688149}
+  - {fileID: 228093454}
+  - {fileID: 806304901}
+  - {fileID: 1792528803}
+  - {fileID: 903765394}
+  - {fileID: 1474125545}
+  - {fileID: 1267868173}
+  - {fileID: 1596988619}
+  - {fileID: 1470544125}
+  - {fileID: 1844394794}
+  - {fileID: 1150910713}
+  - {fileID: 1617399804}
+  - {fileID: 1568109452}
+  - {fileID: 2033847489}
+  - {fileID: 1350093}
+  - {fileID: 1451059735}
+  - {fileID: 711049500}
+  - {fileID: 1858269863}
+  - {fileID: 424275658}
+  - {fileID: 355088831}
+  - {fileID: 2057415596}
+  - {fileID: 992733899}
+  - {fileID: 984241932}
+  - {fileID: 36550971}
+  - {fileID: 2145895820}
+  - {fileID: 735398577}
+  - {fileID: 192313640}
+  - {fileID: 1641254028}
+  - {fileID: 1866953764}
+  - {fileID: 1073391283}
+  - {fileID: 312706882}
+  - {fileID: 1051180356}
+  - {fileID: 1910786206}
+  - {fileID: 1212987151}
+  - {fileID: 591527218}
+  - {fileID: 1752493828}
+  - {fileID: 1215184876}
+  - {fileID: 1181065334}
+  - {fileID: 1823799636}
+  - {fileID: 328446663}
+  - {fileID: 289892238}
+  - {fileID: 764046538}
+  - {fileID: 2119171962}
+  - {fileID: 1876795769}
+  - {fileID: 1460498309}
+  - {fileID: 2131071606}
+  - {fileID: 629575869}
+  - {fileID: 1934193708}
+  - {fileID: 988957254}
+  - {fileID: 1539422988}
+  - {fileID: 544027650}
+  - {fileID: 971754461}
+  - {fileID: 543473794}
+  - {fileID: 227466019}
+  - {fileID: 1553510635}
+  - {fileID: 1172019635}
+  - {fileID: 2146063782}
+  - {fileID: 335038463}
+  - {fileID: 747027355}
+  - {fileID: 671653585}
+  - {fileID: 562288719}
+  - {fileID: 1941062519}
+  - {fileID: 1441138876}
+  - {fileID: 663081205}
+  - {fileID: 1674983099}
+  - {fileID: 1734878021}
+  - {fileID: 33451497}
+  - {fileID: 205063648}
+  - {fileID: 404980535}
 --- !u!1 &1792528800
 GameObject:
   m_ObjectHideFlags: 0
@@ -13818,6 +13932,7 @@ MonoBehaviour:
   tileMap: {fileID: 1782683173}
   scoreText: {fileID: 1274715628}
   gameOverImg: {fileID: 902825373}
+  score: 0
 --- !u!4 &2007239923
 Transform:
   m_ObjectHideFlags: 0
@@ -15060,10 +15175,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1239963675}
   - {fileID: 619394802}
   - {fileID: 782929541}
   - {fileID: 1522499235}
   - {fileID: 1782683174}
   - {fileID: 2007239923}
   - {fileID: 2129299870}
+  - {fileID: 1239963675}

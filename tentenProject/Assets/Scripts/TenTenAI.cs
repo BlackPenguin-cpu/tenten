@@ -70,6 +70,7 @@ public class TenTenAI : MonoBehaviour
         BlockManager.instance.blockQueue.Clear();
         foreach (var blockInfo in data.blockInfos)
         {
+            Debug.Log(BlockManager.instance.blockQueue);
             BlockManager.instance.blockQueue.Enqueue(blockInfo);
         }
     }
@@ -77,6 +78,10 @@ public class TenTenAI : MonoBehaviour
     private void EvolutionLearning()
     {
         var mainLogicInstance = MainGameLogic.instance;
+        BlockArrayLoad();
+        BlockManager.instance.BlockRefill();
+        
+        Debug.Log(EvolutionFirstStart().placePositionList);
     }
 
     [System.Serializable]
@@ -107,6 +112,7 @@ public class TenTenAI : MonoBehaviour
         }
     }
 
+    //json에다 달아두면 다시는 안씀
     private EvolutionData EvolutionFirstStart()
     {
         var mainLogicInstance = MainGameLogic.instance;
@@ -115,6 +121,7 @@ public class TenTenAI : MonoBehaviour
 
         while (!mainLogicInstance.FailCheck())
         {
+            Debug.Log(nowPickBlockNum);
             mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks[nowPickBlockNum]);
 
             Vector2 parseToTilePos;

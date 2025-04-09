@@ -1,11 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+
 
 public class BlockManager : MonoBehaviour
 {
@@ -15,6 +11,7 @@ public class BlockManager : MonoBehaviour
 
     public Queue<BlockInfo> blockQueue = new Queue<BlockInfo>();
     private List<BlockInfo> blockPool = new List<BlockInfo>();
+
     [System.Serializable]
     public struct BlockInfo
     {
@@ -37,16 +34,12 @@ public class BlockManager : MonoBehaviour
 
     private void Start()
     {
-            TenTenAI.instance.BlockArrayLoad();
-    }
-
-    private void Update()
-    {
+        TenTenAI.instance.BlockArrayLoad();
         if (ingameCellBlocks.Count <= 0)
             BlockRefill();
     }
 
-    private void BlockRefill()
+    public void BlockRefill()
     {
         ingameCellBlocks.Clear();
         foreach (var curParent in blockParent)
@@ -56,10 +49,11 @@ public class BlockManager : MonoBehaviour
 
             var curBlock = blockQueue.Dequeue();
             var obj = Instantiate(curCellBlockPool[curBlock.blockNum], curParent);
-            
+
             obj.blockNum = curBlock.blockNum;
             obj.rotNum = curBlock.rotNum;
             obj.transform.Rotate(new Vector3(0, 0, obj.rotNum * 90));
+            Debug.Log(ingameCellBlocks.Count);
             ingameCellBlocks.Add(obj);
         }
     }
@@ -86,6 +80,7 @@ public class BlockManager : MonoBehaviour
             curQueue.Enqueue(blockPool[randNum]);
             blockPool.RemoveAt(randNum);
         }
+
         blockQueue = curQueue;
     }
 }
