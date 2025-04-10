@@ -122,16 +122,19 @@ public class TenTenAI : MonoBehaviour
         {
             if (BlockManager.instance.ingameCellBlocks.Count <= 0)
                 BlockManager.instance.BlockRefill();
-            mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks.First());
 
             Vector2 parseToTilePos;
             Vector2Int curVec;
             do
             {
+                mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks
+                    [Random.Range(0, BlockManager.instance.ingameCellBlocks.Count)]);
                 var randNumX = Mathf.RoundToInt(Random.Range(0, 10));
                 var randNumY = Mathf.RoundToInt(Random.Range(0, 10));
                 curVec = new Vector2Int(randNumX, randNumY);
                 parseToTilePos = MainGameLogic.ChangePosToTilePos(curVec);
+
+                if (MainGameLogic.instance.FailCheck()) break;
             } while (!mainLogicInstance.BlockDrop(parseToTilePos));
 
             posData.Add(curVec);
