@@ -9,7 +9,7 @@ public class MainGameLogic : MonoBehaviour
     public static MainGameLogic instance;
     [SerializeField] private GameObject tileMap;
 
-    private CellInfo[,] cellInfos = new CellInfo[10, 10];
+    private CellInfo[,] cellInfos;
 
     public CellInfo[,] CellInfos
     {
@@ -17,19 +17,23 @@ public class MainGameLogic : MonoBehaviour
         {
             if (cellInfos == null)
             {
-                
+                cellInfos = new CellInfo[10, 10];
                 for (int i = 0; i < 10; i++)
                 {
                     for (int j = 0; j < 10; j++)
                     {
                         cellInfos[i, j] = new CellInfo();
+                        cellInfos[i, j].cellCol = tileMapManager.cellList[i + j * 10];
                     }
                 }
             }
+
             return cellInfos;
         }
         set { cellInfos = value; }
     }
+
+    public TileMapManager tileMapManager;
 
     public class CellInfo
     {
@@ -48,35 +52,15 @@ public class MainGameLogic : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        GetTileMap();
-    }
-
     private void Update()
     {
         UpdateInput();
         scoreText.text = $"Score: {score}";
     }
 
-    private void GetTileMap()
-    {
-        int i = 0;
-        int j = 0;
-        foreach (var col in tileMap.GetComponentsInChildren<BoxCollider2D>())
-        {
-            cellInfos[i, j].cellCol = col;
-            i++;
-            if (i >= 10)
-            {
-                i = 0;
-                j++;
-            }
-        }
-    }
-
     private void UpdateInput()
     {
+        return;
         if (Input.GetMouseButtonDown(0))
             BlockPicking();
         if (nowPickBlock != null)
@@ -119,6 +103,7 @@ public class MainGameLogic : MonoBehaviour
     {
         var col = Physics2D.Raycast(pos, Vector3.forward, 100, 1 << LayerMask.NameToLayer("Tilemap"));
 
+        if (nowPickBlock == null) return false;
         if (col.collider == null)
         {
             nowPickBlock?.transform.DOKill();
@@ -135,13 +120,13 @@ public class MainGameLogic : MonoBehaviour
             var targetPos = vec + blockVec;
 
             if (targetPos.x >= 10 || targetPos.y >= 10 || targetPos.x < 0 || targetPos.y < 0
-                || cellInfos[targetPos.x, targetPos.y].isBlockPlaced == true)
+                || CellInfos[targetPos.x, targetPos.y].isBlockPlaced == true)
             {
                 CurBlockReset();
                 return false;
             }
 
-            infos.Add(cellInfos[targetPos.x, targetPos.y]);
+            infos.Add(CellInfos[targetPos.x, targetPos.y]);
         }
 
         foreach (var info in infos)
@@ -168,14 +153,14 @@ public class MainGameLogic : MonoBehaviour
         {
             for (int i = 0; i < 10; i++)
             {
-                if (cellInfos[j, i].isBlockPlaced == true)
+                if (CellInfos[j, i].isBlockPlaced == true)
                 {
-                    horClearBlockList.Add(cellInfos[j, i]);
+                    horClearBlockList.Add(CellInfos[j, i]);
                 }
 
-                if (cellInfos[i, j].isBlockPlaced == true)
+                if (CellInfos[i, j].isBlockPlaced == true)
                 {
-                    verClearBlockList.Add(cellInfos[i, j]);
+                    verClearBlockList.Add(CellInfos[i, j]);
                 }
             }
 
@@ -212,7 +197,7 @@ public class MainGameLogic : MonoBehaviour
                     {
                         var targetPos = new Vector2Int(i, j) + vec;
                         if (targetPos.x >= 10 || targetPos.y >= 10 || targetPos.x < 0 || targetPos.y < 0
-                            || cellInfos[targetPos.x, targetPos.y].isBlockPlaced == true)
+                            || CellInfos[targetPos.x, targetPos.y].isBlockPlaced == true)
                         {
                             isBlockPlacedImpossible = true;
                             break;

@@ -77,10 +77,10 @@ public class TenTenAI : MonoBehaviour
 
     private void EvolutionLearning()
     {
-        var mainLogicInstance = MainGameLogic.instance;
+        var mapinLogicInstance = MainGameLogic.instance;
         BlockArrayLoad();
         BlockManager.instance.BlockRefill();
-        
+
         Debug.Log(EvolutionFirstStart().placePositionList);
     }
 
@@ -117,12 +117,12 @@ public class TenTenAI : MonoBehaviour
     {
         var mainLogicInstance = MainGameLogic.instance;
         List<Vector2Int> posData = new List<Vector2Int>();
-        int nowPickBlockNum = 0;
 
         while (!mainLogicInstance.FailCheck())
         {
-            Debug.Log(nowPickBlockNum);
-            mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks[nowPickBlockNum]);
+            if (BlockManager.instance.ingameCellBlocks.Count <= 0)
+                BlockManager.instance.BlockRefill();
+            mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks.First());
 
             Vector2 parseToTilePos;
             Vector2Int curVec;
@@ -133,10 +133,6 @@ public class TenTenAI : MonoBehaviour
                 curVec = new Vector2Int(randNumX, randNumY);
                 parseToTilePos = MainGameLogic.ChangePosToTilePos(curVec);
             } while (!mainLogicInstance.BlockDrop(parseToTilePos));
-
-            nowPickBlockNum++;
-            if (nowPickBlockNum >= 3)
-                nowPickBlockNum = 0;
 
             posData.Add(curVec);
         }

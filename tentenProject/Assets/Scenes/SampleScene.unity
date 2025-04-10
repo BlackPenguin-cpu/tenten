@@ -13930,6 +13930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMap: {fileID: 1782683173}
+  tileMapManager: {fileID: 1782683175}
   scoreText: {fileID: 1274715628}
   gameOverImg: {fileID: 902825373}
   score: 0
