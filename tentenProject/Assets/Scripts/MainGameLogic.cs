@@ -4,6 +4,14 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
+public struct ScoreInfo
+{
+    public int score;
+    public int lineClearCount;
+    public int cellPlaceCount;
+    public int blockPlaceCount;
+}
+
 public class MainGameLogic : MonoBehaviour
 {
     public static MainGameLogic instance;
@@ -34,6 +42,7 @@ public class MainGameLogic : MonoBehaviour
     }
 
     public TileMapManager tileMapManager;
+    public ScoreInfo scoreInfo;
 
     public class CellInfo
     {
@@ -45,7 +54,7 @@ public class MainGameLogic : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject gameOverImg;
-    public int score;
+
 
     private void Awake()
     {
@@ -55,7 +64,6 @@ public class MainGameLogic : MonoBehaviour
     private void Update()
     {
         UpdateInput();
-        scoreText.text = $"Score: {score}";
     }
 
     private void UpdateInput()
@@ -132,16 +140,21 @@ public class MainGameLogic : MonoBehaviour
         foreach (var info in infos)
         {
             info.isBlockPlaced = true;
-            score += 100;
+            scoreInfo.score += 100;
+            scoreInfo.cellPlaceCount++;
             info.cellCol.GetComponent<SpriteRenderer>().color = nowPickBlock.curColor;
         }
 
         BlockManager.instance.ingameCellBlocks.Remove(nowPickBlock);
         Destroy(nowPickBlock.gameObject);
         nowPickBlock = null;
+        scoreInfo.blockPlaceCount++;
 
         BlockClearCheck();
         FailCheck();
+
+        UIManager.instance.InfoApply(scoreInfo);
+        
         return true;
     }
 
@@ -231,7 +244,11 @@ public class MainGameLogic : MonoBehaviour
     private void BlockClear(List<CellInfo> blockList, bool isOver = false)
     {
         if (!isOver)
-            score += 1000;
+        {
+            scoreInfo.score += 1000;
+            scoreInfo.lineClearCount++;
+        }
+
         foreach (var block in blockList)
         {
             block.isBlockPlaced = false;

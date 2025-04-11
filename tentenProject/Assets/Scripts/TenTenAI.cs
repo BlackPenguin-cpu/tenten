@@ -88,7 +88,7 @@ public class TenTenAI : MonoBehaviour
     private struct EvolutionData
     {
         public List<ActionData> placePositionList;
-        public int score;
+        public ScoreInfo scoreInfo;
 
         [System.Serializable]
         public struct ActionData
@@ -105,10 +105,10 @@ public class TenTenAI : MonoBehaviour
             }
         }
 
-        public EvolutionData(List<ActionData> placePositionList, int score)
+        public EvolutionData(List<ActionData> placePositionList, ScoreInfo scoreInfo)
         {
             this.placePositionList = placePositionList;
-            this.score = score;
+            this.scoreInfo = scoreInfo;
         }
     }
 
@@ -148,7 +148,7 @@ public class TenTenAI : MonoBehaviour
                 curPos));
         }
 
-        var returnData = new EvolutionData(actionDataList, mainLogicInstance.score);
+        var returnData = new EvolutionData(actionDataList, mainLogicInstance.scoreInfo);
         return returnData;
     }
 }
