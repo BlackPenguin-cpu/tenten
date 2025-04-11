@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class TenTenAI : MonoBehaviour
@@ -95,13 +96,15 @@ public class TenTenAI : MonoBehaviour
         {
             public int blockType;
             public int blockRot;
-            public Vector2Int placePositionList;
 
-            public ActionData(int blockType, int blockRot, Vector2Int placePositionList)
+            [FormerlySerializedAs("placePositionList")]
+            public Vector2Int placePosition;
+
+            public ActionData(int blockType, int blockRot, Vector2Int placePosition)
             {
                 this.blockType = blockType;
                 this.blockRot = blockRot;
-                this.placePositionList = placePositionList;
+                this.placePosition = placePosition;
             }
         }
 
@@ -116,39 +119,38 @@ public class TenTenAI : MonoBehaviour
     private EvolutionData EvolutionFirstStart()
     {
         var mainLogicInstance = MainGameLogic.instance;
-        List<Vector2Int> posData = new List<Vector2Int>();
+        List<EvolutionData.ActionData> actionData = new List<EvolutionData.ActionData>();
 
         while (!mainLogicInstance.FailCheck())
         {
             if (BlockManager.instance.ingameCellBlocks.Count <= 0)
                 BlockManager.instance.BlockRefill();
 
+            var curActionData = new EvolutionData.ActionData();
             Vector2 parseToTilePos;
-            Vector2Int curVec;
+
             do
             {
                 mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks
                     [Random.Range(0, BlockManager.instance.ingameCellBlocks.Count)]);
+
+                var nowPickBlockData = mainLogicInstance.nowPickBlock;
+                curActionData.blockType = nowPickBlockData.blockNum;
+                curActionData.blockRot = nowPickBlockData.rotNum;
+
                 var randNumX = Mathf.RoundToInt(Random.Range(0, 10));
                 var randNumY = Mathf.RoundToInt(Random.Range(0, 10));
-                curVec = new Vector2Int(randNumX, randNumY);
-                parseToTilePos = MainGameLogic.ChangePosToTilePos(curVec);
+                curActionData.placePosition = new Vector2Int(randNumX, randNumY);
+                parseToTilePos = MainGameLogic.ChangePosToTilePos(curActionData.placePosition);
+
 
                 if (MainGameLogic.instance.FailCheck()) break;
             } while (!mainLogicInstance.BlockDrop(parseToTilePos));
 
-            posData.Add(curVec);
+            actionData.Add(curActionData);
         }
 
-        List<EvolutionData.ActionData> actionDataList = new List<EvolutionData.ActionData>();
-        foreach (var curPos in posData)
-        {
-            var nowPickBlockData = mainLogicInstance.nowPickBlock;
-            actionDataList.Add(new EvolutionData.ActionData(nowPickBlockData.blockNum, nowPickBlockData.rotNum,
-                curPos));
-        }
-
-        var returnData = new EvolutionData(actionDataList, mainLogicInstance.scoreInfo);
+        var returnData = new EvolutionData(actionData, mainLogicInstance.scoreInfo);
         return returnData;
     }
 }
