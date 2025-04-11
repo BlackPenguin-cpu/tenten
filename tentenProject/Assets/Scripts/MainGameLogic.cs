@@ -4,6 +4,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
+[System.Serializable]
 public struct ScoreInfo
 {
     public int score;
@@ -68,7 +69,6 @@ public class MainGameLogic : MonoBehaviour
 
     private void UpdateInput()
     {
-        return;
         if (Input.GetMouseButtonDown(0))
             BlockPicking();
         if (nowPickBlock != null)
@@ -119,7 +119,7 @@ public class MainGameLogic : MonoBehaviour
             return false;
         }
 
-        var vec = ChangeTilePosToPos(col.transform.position);
+        var vec = TileMapManager.ChangeTilePosToPos(col.transform.position);
         var blockVecList = nowPickBlock.GetThisBlockState();
         List<CellInfo> infos = new List<CellInfo>();
 
@@ -149,12 +149,15 @@ public class MainGameLogic : MonoBehaviour
         Destroy(nowPickBlock.gameObject);
         nowPickBlock = null;
         scoreInfo.blockPlaceCount++;
+        
+        if (BlockManager.instance.ingameCellBlocks.Count <= 0)
+            BlockManager.instance.BlockRefill();
 
         BlockClearCheck();
         FailCheck();
 
         UIManager.instance.InfoApply(scoreInfo);
-        
+
         return true;
     }
 
@@ -269,54 +272,27 @@ public class MainGameLogic : MonoBehaviour
         nowPickBlock = null;
     }
 
-    public static Vector2 ChangePosToTilePos(Vector2Int pos)
+    public void GameReset()
     {
-        var startXPos = -2.5f;
-        var startYPos = 2.5f;
-        var xyPos = 0.55f;
-
-        return new Vector2(startXPos + pos.x * xyPos, startYPos + pos.y * -xyPos);
-    }
-
-    public static Vector2Int ChangeBlockPosToPos(Vector2 blockPos, int rotNum)
-    {
-        var xyTilePos = 0.55f;
-        var xPos = Mathf.RoundToInt((blockPos.x / xyTilePos));
-        var yPos = Mathf.RoundToInt(blockPos.y / xyTilePos);
-        Vector2Int newPos = new Vector2Int(xPos, yPos);
-
-
-        if (rotNum == 1)
+        //Tilemap CellInfo Reset
+        foreach (var tile in tileMapManager.cellList)
         {
-            newPos.y = xPos;
-            newPos.x = -yPos;
+            tile.GetComponent<SpriteRenderer>().color = Color.white;
         }
+        CellInfos = null;
 
-        if (rotNum == 3)
+        //ScoreInfo Reset
+        scoreInfo = new ScoreInfo();
+            
+        //ingameCellBlock Reset    
+        TenTenAI.instance.BlockArrayLoad();
+        foreach (var obj in BlockManager.instance.ingameCellBlocks)
         {
-            newPos.y = -xPos;
-            newPos.x = yPos;
+            Destroy(obj.gameObject);
         }
-
-        if (rotNum == 2)
-        {
-            newPos.x = -xPos;
-            newPos.y = -yPos;
-        }
-
-        return new Vector2Int(newPos.x, -newPos.y);
-    }
-
-    public static Vector2Int ChangeTilePosToPos(Vector2 tilePos)
-    {
-        var startTileXPos = -2.5f;
-        var startTileYPos = 2.5f;
-
-        var xyTilePos = 0.55f;
-
-        var xPos = Mathf.RoundToInt(((tilePos.x - startTileXPos) / xyTilePos));
-        var yPos = Mathf.RoundToInt((tilePos.y - startTileYPos) / xyTilePos);
-
-        return new Vector2Int(Mathf.Abs(xPos), Mathf.Abs(yPos));
+        BlockManager.instance.ingameCellBlocks.Clear();
+        
+        //GameOver UI Active false
+        gameOverImg.SetActive(false);
     }
 }

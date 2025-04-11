@@ -71,7 +71,6 @@ public class TenTenAI : MonoBehaviour
         BlockManager.instance.blockQueue.Clear();
         foreach (var blockInfo in data.blockInfos)
         {
-            Debug.Log(BlockManager.instance.blockQueue);
             BlockManager.instance.blockQueue.Enqueue(blockInfo);
         }
     }
@@ -82,13 +81,17 @@ public class TenTenAI : MonoBehaviour
         BlockArrayLoad();
         BlockManager.instance.BlockRefill();
 
-        Debug.Log(EvolutionFirstStart().placePositionList);
+        var firstEvolutionData = EvolutionFirstStart();
+        var json = JsonUtility.ToJson(firstEvolutionData);
+        Debug.Log(json);
+
+        mapinLogicInstance.GameReset();
     }
 
     [System.Serializable]
     private struct EvolutionData
     {
-        public List<ActionData> placePositionList;
+        public List<ActionData> actionDataList;
         public ScoreInfo scoreInfo;
 
         [System.Serializable]
@@ -108,9 +111,9 @@ public class TenTenAI : MonoBehaviour
             }
         }
 
-        public EvolutionData(List<ActionData> placePositionList, ScoreInfo scoreInfo)
+        public EvolutionData(List<ActionData> actionDataList, ScoreInfo scoreInfo)
         {
-            this.placePositionList = placePositionList;
+            this.actionDataList = actionDataList;
             this.scoreInfo = scoreInfo;
         }
     }
@@ -123,9 +126,6 @@ public class TenTenAI : MonoBehaviour
 
         while (!mainLogicInstance.FailCheck())
         {
-            if (BlockManager.instance.ingameCellBlocks.Count <= 0)
-                BlockManager.instance.BlockRefill();
-
             var curActionData = new EvolutionData.ActionData();
             Vector2 parseToTilePos;
 
@@ -141,7 +141,7 @@ public class TenTenAI : MonoBehaviour
                 var randNumX = Mathf.RoundToInt(Random.Range(0, 10));
                 var randNumY = Mathf.RoundToInt(Random.Range(0, 10));
                 curActionData.placePosition = new Vector2Int(randNumX, randNumY);
-                parseToTilePos = MainGameLogic.ChangePosToTilePos(curActionData.placePosition);
+                parseToTilePos = TileMapManager.ChangePosToTilePos(curActionData.placePosition);
 
 
                 if (MainGameLogic.instance.FailCheck()) break;

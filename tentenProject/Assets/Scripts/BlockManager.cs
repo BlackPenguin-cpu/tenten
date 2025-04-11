@@ -53,7 +53,6 @@ public class BlockManager : MonoBehaviour
             obj.blockNum = curBlock.blockNum;
             obj.rotNum = curBlock.rotNum;
             obj.transform.Rotate(new Vector3(0, 0, obj.rotNum * 90));
-            Debug.Log(ingameCellBlocks.Count);
             ingameCellBlocks.Add(obj);
         }
     }
