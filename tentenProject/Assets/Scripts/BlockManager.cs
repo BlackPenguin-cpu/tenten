@@ -45,9 +45,9 @@ public class BlockManager : MonoBehaviour
         foreach (var curParent in blockParent)
         {
             //if (blockPool.Count <= 0)
-            //    BlockQueueRefill();
+                //BlockQueueRefill();
 
-            var curBlock = blockQueue.Dequeue();
+                var curBlock = blockQueue.Dequeue();
             var obj = Instantiate(curCellBlockPool[curBlock.blockNum], curParent);
 
             obj.blockNum = curBlock.blockNum;

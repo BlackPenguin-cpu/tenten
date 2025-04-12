@@ -291,6 +291,7 @@ public class MainGameLogic : MonoBehaviour
             Destroy(obj.gameObject);
         }
         BlockManager.instance.ingameCellBlocks.Clear();
+        BlockManager.instance.BlockRefill();
         
         //GameOver UI Active false
         gameOverImg.SetActive(false);

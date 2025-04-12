@@ -35,23 +35,18 @@ public class TenTenAI : MonoBehaviour
         }
     }
 
-    [System.Serializable]
-    private struct BlockInfoForSave
-    {
-        public List<BlockManager.BlockInfo> blockInfos;
-
-        public BlockInfoForSave(Queue<BlockManager.BlockInfo> blockInfos)
-        {
-            this.blockInfos = blockInfos.ToList();
-        }
-    }
 
     private void BlockArraySave()
     {
         var pool = new BlockInfoForSave(BlockManager.instance.blockQueue);
         var json = JsonUtility.ToJson(pool);
 
-        FileStream fileStream = new FileStream(Application.dataPath + @"\TenTenAI.json", FileMode.Create);
+        JsonFileSave(json, "TenTenAI", "");
+    }
+
+    private void JsonFileSave(string json, string fileName, string path)
+    {
+        FileStream fileStream = new FileStream(Application.dataPath + $@"\{path}\{fileName}.json", FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(json);
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
@@ -81,45 +76,25 @@ public class TenTenAI : MonoBehaviour
         BlockArrayLoad();
         BlockManager.instance.BlockRefill();
 
-        var firstEvolutionData = EvolutionFirstStart();
-        var json = JsonUtility.ToJson(firstEvolutionData);
-        Debug.Log(json);
+        var jsonData = new List<EvolutionData>();
+        const int EvolutionRepeatCount = 30;
 
-        mapinLogicInstance.GameReset();
-    }
-
-    [System.Serializable]
-    private struct EvolutionData
-    {
-        public List<ActionData> actionDataList;
-        public ScoreInfo scoreInfo;
-
-        [System.Serializable]
-        public struct ActionData
+        for (int i = 0; i < EvolutionRepeatCount; i++)
         {
-            public int blockType;
-            public int blockRot;
-
-            [FormerlySerializedAs("placePositionList")]
-            public Vector2Int placePosition;
-
-            public ActionData(int blockType, int blockRot, Vector2Int placePosition)
-            {
-                this.blockType = blockType;
-                this.blockRot = blockRot;
-                this.placePosition = placePosition;
-            }
+            var randomEvolutionData = EvolutionAllRandomGenerate();
+            jsonData.Add(randomEvolutionData);
+            mapinLogicInstance.GameReset();
         }
 
-        public EvolutionData(List<ActionData> actionDataList, ScoreInfo scoreInfo)
-        {
-            this.actionDataList = actionDataList;
-            this.scoreInfo = scoreInfo;
-        }
+        const string path = "EvolutionFolder";
+        var json = JsonUtility.ToJson(new EvolutionDataListJson(jsonData));
+        JsonFileSave(json, "GenerateData #0", path);
+
+        var list = jsonData.OrderByDescending((x) => x.scoreInfo.score);
+        Debug.Log( $"HighScore : {list.ToList().First().scoreInfo.score}");
     }
 
-    //json에다 달아두면 다시는 안씀
-    private EvolutionData EvolutionFirstStart()
+    private EvolutionData EvolutionAllRandomGenerate()
     {
         var mainLogicInstance = MainGameLogic.instance;
         List<EvolutionData.ActionData> actionData = new List<EvolutionData.ActionData>();
@@ -152,5 +127,58 @@ public class TenTenAI : MonoBehaviour
 
         var returnData = new EvolutionData(actionData, mainLogicInstance.scoreInfo);
         return returnData;
+    }
+
+
+    [System.Serializable]
+    private struct EvolutionDataListJson
+    {
+        public List<EvolutionData> evolutionData;
+
+        public EvolutionDataListJson(List<EvolutionData> evolutionData)
+        {
+            this.evolutionData = evolutionData;
+        }
+    }
+
+    [System.Serializable]
+    private struct EvolutionData
+    {
+        public List<ActionData> actionDataList;
+        public ScoreInfo scoreInfo;
+
+        [System.Serializable]
+        public struct ActionData
+        {
+            public int blockType;
+            public int blockRot;
+
+            [FormerlySerializedAs("placePositionList")]
+            public Vector2Int placePosition;
+
+            public ActionData(int blockType, int blockRot, Vector2Int placePosition)
+            {
+                this.blockType = blockType;
+                this.blockRot = blockRot;
+                this.placePosition = placePosition;
+            }
+        }
+
+        public EvolutionData(List<ActionData> actionDataList, ScoreInfo scoreInfo)
+        {
+            this.actionDataList = actionDataList;
+            this.scoreInfo = scoreInfo;
+        }
+    }
+
+    [System.Serializable]
+    private struct BlockInfoForSave
+    {
+        public List<BlockManager.BlockInfo> blockInfos;
+
+        public BlockInfoForSave(Queue<BlockManager.BlockInfo> blockInfos)
+        {
+            this.blockInfos = blockInfos.ToList();
+        }
     }
 }
