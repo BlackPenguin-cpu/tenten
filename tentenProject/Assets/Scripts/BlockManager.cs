@@ -32,22 +32,15 @@ public class BlockManager : MonoBehaviour
         instance = this;
     }
 
-    private void Start()
-    {
-        TenTenAI.instance.BlockArrayLoad();
-        if (ingameCellBlocks.Count <= 0)
-            BlockRefill();
-    }
-
     public void BlockRefill()
     {
         ingameCellBlocks.Clear();
         foreach (var curParent in blockParent)
         {
             //if (blockPool.Count <= 0)
-                //BlockQueueRefill();
+            //BlockQueueRefill();
 
-                var curBlock = blockQueue.Dequeue();
+            var curBlock = blockQueue.Dequeue();
             var obj = Instantiate(curCellBlockPool[curBlock.blockNum], curParent);
 
             obj.blockNum = curBlock.blockNum;

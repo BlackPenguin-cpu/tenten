@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,6 +11,8 @@ using Random = UnityEngine.Random;
 public class TenTenAI : MonoBehaviour
 {
     public static TenTenAI instance;
+    [SerializeField] private int EvolutionRepeatCount = 30;
+
 
     private void Awake()
     {
@@ -73,12 +76,10 @@ public class TenTenAI : MonoBehaviour
     private void EvolutionLearning()
     {
         var mapinLogicInstance = MainGameLogic.instance;
-        BlockArrayLoad();
-        BlockManager.instance.BlockRefill();
 
         var jsonData = new List<EvolutionData>();
-        const int EvolutionRepeatCount = 30;
-
+        int generationCount = 0;
+        
         for (int i = 0; i < EvolutionRepeatCount; i++)
         {
             var randomEvolutionData = EvolutionAllRandomGenerate();
@@ -86,12 +87,21 @@ public class TenTenAI : MonoBehaviour
             mapinLogicInstance.GameReset();
         }
 
+        SaveEvolutionData(jsonData, generationCount);
+    }
+
+    private void SaveEvolutionData(List<EvolutionData> jsonData,int generationCount)
+    {
         const string path = "EvolutionFolder";
         var json = JsonUtility.ToJson(new EvolutionDataListJson(jsonData));
-        JsonFileSave(json, "GenerateData #0", path);
+        const string fileNameFormat = "GenerateData #{0}";
+        var fileName = string.Format(fileNameFormat, generationCount);
+
+        JsonFileSave(json, fileName, path);
 
         var list = jsonData.OrderByDescending((x) => x.scoreInfo.score);
-        Debug.Log( $"HighScore : {list.ToList().First().scoreInfo.score}");
+        Debug.Log($"HighScore : {list.ToList().First().scoreInfo.score}");
+        
     }
 
     private EvolutionData EvolutionAllRandomGenerate()
@@ -101,6 +111,12 @@ public class TenTenAI : MonoBehaviour
 
         while (!mainLogicInstance.FailCheck())
         {
+            if (BlockManager.instance.blockQueue.Count <= 0)
+            {
+                BlockArrayLoad();
+                BlockManager.instance.BlockRefill();
+            }
+
             var curActionData = new EvolutionData.ActionData();
             Vector2 parseToTilePos;
 
@@ -109,15 +125,14 @@ public class TenTenAI : MonoBehaviour
                 mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks
                     [Random.Range(0, BlockManager.instance.ingameCellBlocks.Count)]);
 
-                var nowPickBlockData = mainLogicInstance.nowPickBlock;
-                curActionData.blockType = nowPickBlockData.blockNum;
-                curActionData.blockRot = nowPickBlockData.rotNum;
+                var nowPickBlock = mainLogicInstance.nowPickBlock;
+                curActionData.blockType = nowPickBlock.blockNum;
+                curActionData.blockRot = nowPickBlock.rotNum;
 
                 var randNumX = Mathf.RoundToInt(Random.Range(0, 10));
                 var randNumY = Mathf.RoundToInt(Random.Range(0, 10));
                 curActionData.placePosition = new Vector2Int(randNumX, randNumY);
                 parseToTilePos = TileMapManager.ChangePosToTilePos(curActionData.placePosition);
-
 
                 if (MainGameLogic.instance.FailCheck()) break;
             } while (!mainLogicInstance.BlockDrop(parseToTilePos));

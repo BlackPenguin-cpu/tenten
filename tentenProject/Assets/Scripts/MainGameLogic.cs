@@ -285,12 +285,13 @@ public class MainGameLogic : MonoBehaviour
         scoreInfo = new ScoreInfo();
             
         //ingameCellBlock Reset    
-        TenTenAI.instance.BlockArrayLoad();
+        BlockManager.instance.blockQueue.Clear();
         foreach (var obj in BlockManager.instance.ingameCellBlocks)
         {
             Destroy(obj.gameObject);
         }
         BlockManager.instance.ingameCellBlocks.Clear();
+        TenTenAI.instance.BlockArrayLoad();
         BlockManager.instance.BlockRefill();
         
         //GameOver UI Active false
