@@ -26,15 +26,10 @@ public class TenTenAI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            Debug.Log("Pattern Load");
-        }
-
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("Pattern Save");
-            BlockArraySave();
+            Debug.Log("Next Generation");
+           
         }
     }
 
@@ -65,7 +60,7 @@ public class TenTenAI : MonoBehaviour
 
         var json = File.ReadAllText(Application.dataPath + @"\TenTenAI.json");
         var data = JsonUtility.FromJson<BlockInfoForSave>(json);
-
+        
         BlockManager.instance.blockQueue.Clear();
         foreach (var blockInfo in data.blockInfos)
         {
@@ -99,7 +94,7 @@ public class TenTenAI : MonoBehaviour
 
         JsonFileSave(json, fileName, path);
 
-        var list = jsonData.OrderByDescending((x) => x.scoreInfo.score);
+        var list = jsonData.OrderByDescending(x => x.scoreInfo.score);
         Debug.Log($"HighScore : {list.ToList().First().scoreInfo.score}");
         
     }
