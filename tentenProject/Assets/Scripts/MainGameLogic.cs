@@ -145,11 +145,16 @@ public class MainGameLogic : MonoBehaviour
             info.cellCol.GetComponent<SpriteRenderer>().color = nowPickBlock.curColor;
         }
 
+        foreach (var cell in CellInfos)
+        {
+            if (cell.isBlockPlaced == false) scoreInfo.score += 10;
+        }
+
         BlockManager.instance.ingameCellBlocks.Remove(nowPickBlock);
         Destroy(nowPickBlock.gameObject);
         nowPickBlock = null;
         scoreInfo.blockPlaceCount++;
-        
+
         if (BlockManager.instance.ingameCellBlocks.Count <= 0)
             BlockManager.instance.BlockRefill();
 
@@ -279,21 +284,23 @@ public class MainGameLogic : MonoBehaviour
         {
             tile.GetComponent<SpriteRenderer>().color = Color.white;
         }
+
         CellInfos = null;
 
         //ScoreInfo Reset
         scoreInfo = new ScoreInfo();
-            
+
         //ingameCellBlock Reset    
         BlockManager.instance.blockQueue.Clear();
         foreach (var obj in BlockManager.instance.ingameCellBlocks)
         {
             Destroy(obj.gameObject);
         }
+
         BlockManager.instance.ingameCellBlocks.Clear();
         TenTenAI.instance.BlockArrayLoad();
         BlockManager.instance.BlockRefill();
-        
+
         //GameOver UI Active false
         gameOverImg.SetActive(false);
     }

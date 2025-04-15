@@ -29,7 +29,6 @@ public class TenTenAI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             Debug.Log("Next Generation");
-           
         }
     }
 
@@ -60,7 +59,7 @@ public class TenTenAI : MonoBehaviour
 
         var json = File.ReadAllText(Application.dataPath + @"\TenTenAI.json");
         var data = JsonUtility.FromJson<BlockInfoForSave>(json);
-        
+
         BlockManager.instance.blockQueue.Clear();
         foreach (var blockInfo in data.blockInfos)
         {
@@ -74,7 +73,7 @@ public class TenTenAI : MonoBehaviour
 
         var jsonData = new List<EvolutionData>();
         int generationCount = 0;
-        
+
         for (int i = 0; i < EvolutionRepeatCount; i++)
         {
             var randomEvolutionData = EvolutionAllRandomGenerate();
@@ -85,21 +84,7 @@ public class TenTenAI : MonoBehaviour
         SaveEvolutionData(jsonData, generationCount);
     }
 
-    private void SaveEvolutionData(List<EvolutionData> jsonData,int generationCount)
-    {
-        const string path = "EvolutionFolder";
-        var json = JsonUtility.ToJson(new EvolutionDataListJson(jsonData));
-        const string fileNameFormat = "GenerateData #{0}";
-        var fileName = string.Format(fileNameFormat, generationCount);
-
-        JsonFileSave(json, fileName, path);
-
-        var list = jsonData.OrderByDescending(x => x.scoreInfo.score);
-        Debug.Log($"HighScore : {list.ToList().First().scoreInfo.score}");
-        
-    }
-
-    private EvolutionData EvolutionAllRandomGenerate()
+    private EvolutionData EvolutionProcess(EvolutionData evolutionData)
     {
         var mainLogicInstance = MainGameLogic.instance;
         List<EvolutionData.ActionData> actionData = new List<EvolutionData.ActionData>();
@@ -139,6 +124,74 @@ public class TenTenAI : MonoBehaviour
         return returnData;
     }
 
+    private void SaveEvolutionData(List<EvolutionData> jsonData, int generationCount)
+    {
+        const string path = "EvolutionFolder";
+        var json = JsonUtility.ToJson(new EvolutionDataListJson(jsonData));
+        const string fileNameFormat = "GenerateData #{0}";
+        var fileName = string.Format(fileNameFormat, generationCount);
+
+        JsonFileSave(json, fileName, path);
+
+        var list = jsonData.OrderByDescending(x => x.scoreInfo.score);
+        Debug.Log($"HighScore : {list.ToList().First().scoreInfo.score}");
+    }
+
+    /*
+     행동마다 스코어를 몇 얻었는지 기록하여 
+     낮은 스코어의 기록을 수정시킬 필요가 있다 판단
+
+        행동마다 오른 스코어를 기록
+            스코어가 오르는 경우:
+            BlockDrop후 빈셀의 총합   (셀 당 +10)
+            설치된 블럭의 크기   (블럭당 +100)
+            한줄 지움   (+1000)
+
+    그 후 행동과 행동사이에 가장 스코어의 차가 큰 행동부터 수정
+     */
+    
+    private EvolutionData EvolutionAllRandomGenerate()
+    {
+        var mainLogicInstance = MainGameLogic.instance;
+        List<EvolutionData.ActionData> actionData = new List<EvolutionData.ActionData>();
+
+        while (!mainLogicInstance.FailCheck())
+        {
+            if (BlockManager.instance.blockQueue.Count <= 0)
+            {
+                BlockArrayLoad();
+                BlockManager.instance.BlockRefill();
+            }
+
+            var curActionData = new EvolutionData.ActionData();
+            var prevScore = mainLogicInstance.scoreInfo.score;
+            Vector2 parseToTilePos;
+
+            do
+            {
+                mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks
+                    [Random.Range(0, BlockManager.instance.ingameCellBlocks.Count)]);
+
+                var nowPickBlock = mainLogicInstance.nowPickBlock;
+                curActionData.blockType = nowPickBlock.blockNum;
+                curActionData.blockRot = nowPickBlock.rotNum;
+
+                var randNumX = Mathf.RoundToInt(Random.Range(0, 10));
+                var randNumY = Mathf.RoundToInt(Random.Range(0, 10));
+                curActionData.placePosition = new Vector2Int(randNumX, randNumY);
+                parseToTilePos = TileMapManager.ChangePosToTilePos(curActionData.placePosition);
+
+                if (MainGameLogic.instance.FailCheck()) break;
+            } while (!mainLogicInstance.BlockDrop(parseToTilePos));
+
+            curActionData.earnScoreValue = mainLogicInstance.scoreInfo.score - prevScore;
+            actionData.Add(curActionData);
+        }
+
+        var returnData = new EvolutionData(actionData, mainLogicInstance.scoreInfo);
+        return returnData;
+    }
+
 
     [System.Serializable]
     private struct EvolutionDataListJson
@@ -157,13 +210,19 @@ public class TenTenAI : MonoBehaviour
         public List<ActionData> actionDataList;
         public ScoreInfo scoreInfo;
 
+        public EvolutionData(List<ActionData> actionDataList, ScoreInfo scoreInfo)
+        {
+            this.actionDataList = actionDataList;
+            this.scoreInfo = scoreInfo;
+        }
+
         [System.Serializable]
         public struct ActionData
         {
             public int blockType;
             public int blockRot;
+            public int earnScoreValue;
 
-            [FormerlySerializedAs("placePositionList")]
             public Vector2Int placePosition;
 
             public ActionData(int blockType, int blockRot, Vector2Int placePosition)
@@ -171,13 +230,8 @@ public class TenTenAI : MonoBehaviour
                 this.blockType = blockType;
                 this.blockRot = blockRot;
                 this.placePosition = placePosition;
+                earnScoreValue = 0;
             }
-        }
-
-        public EvolutionData(List<ActionData> actionDataList, ScoreInfo scoreInfo)
-        {
-            this.actionDataList = actionDataList;
-            this.scoreInfo = scoreInfo;
         }
     }
 
