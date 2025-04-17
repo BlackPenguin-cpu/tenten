@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class TenTenAI : MonoBehaviour
@@ -67,6 +64,13 @@ public class TenTenAI : MonoBehaviour
         }
     }
 
+    /*
+        행동마다 오른 스코어를 기록
+            스코어가 오르는 경우:
+            BlockDrop후 빈셀의 총합   (셀 당 +10)
+            설치된 블럭의 크기   (블럭당 +100)
+            한줄 지움   (+1000)
+ */
     private void EvolutionLearning()
     {
         var mapinLogicInstance = MainGameLogic.instance;
@@ -81,13 +85,12 @@ public class TenTenAI : MonoBehaviour
             mapinLogicInstance.GameReset();
         }
 
-        SaveEvolutionData(jsonData, generationCount);
+         SaveEvolutionData(jsonData, generationCount);
     }
 
-    private EvolutionData EvolutionProcess(EvolutionData evolutionData)
+    private void EvolutionProcess(EvolutionData evolutionData)
     {
         var mainLogicInstance = MainGameLogic.instance;
-        List<EvolutionData.ActionData> actionData = new List<EvolutionData.ActionData>();
 
         while (!mainLogicInstance.FailCheck())
         {
@@ -97,32 +100,11 @@ public class TenTenAI : MonoBehaviour
                 BlockManager.instance.BlockRefill();
             }
 
-            var curActionData = new EvolutionData.ActionData();
-            Vector2 parseToTilePos;
 
-            do
-            {
-                mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks
-                    [Random.Range(0, BlockManager.instance.ingameCellBlocks.Count)]);
-
-                var nowPickBlock = mainLogicInstance.nowPickBlock;
-                curActionData.blockType = nowPickBlock.blockNum;
-                curActionData.blockRot = nowPickBlock.rotNum;
-
-                var randNumX = Mathf.RoundToInt(Random.Range(0, 10));
-                var randNumY = Mathf.RoundToInt(Random.Range(0, 10));
-                curActionData.placePosition = new Vector2Int(randNumX, randNumY);
-                parseToTilePos = TileMapManager.ChangePosToTilePos(curActionData.placePosition);
-
-                if (MainGameLogic.instance.FailCheck()) break;
-            } while (!mainLogicInstance.BlockDrop(parseToTilePos));
-
-            actionData.Add(curActionData);
+            if (MainGameLogic.instance.FailCheck()) break;
         }
-
-        var returnData = new EvolutionData(actionData, mainLogicInstance.scoreInfo);
-        return returnData;
     }
+
 
     private void SaveEvolutionData(List<EvolutionData> jsonData, int generationCount)
     {
@@ -136,23 +118,12 @@ public class TenTenAI : MonoBehaviour
         var list = jsonData.OrderByDescending(x => x.scoreInfo.score);
         Debug.Log($"HighScore : {list.ToList().First().scoreInfo.score}");
     }
-
-    /*
-     행동마다 스코어를 몇 얻었는지 기록하여 
-     낮은 스코어의 기록을 수정시킬 필요가 있다 판단
-
-        행동마다 오른 스코어를 기록
-            스코어가 오르는 경우:
-            BlockDrop후 빈셀의 총합   (셀 당 +10)
-            설치된 블럭의 크기   (블럭당 +100)
-            한줄 지움   (+1000)
-
-    그 후 행동과 행동사이에 가장 스코어의 차가 큰 행동부터 수정
-     */
     
+
     private EvolutionData EvolutionAllRandomGenerate()
     {
         var mainLogicInstance = MainGameLogic.instance;
+        var blockManagerInstance = BlockManager.instance;
         List<EvolutionData.ActionData> actionData = new List<EvolutionData.ActionData>();
 
         while (!mainLogicInstance.FailCheck())
@@ -169,8 +140,8 @@ public class TenTenAI : MonoBehaviour
 
             do
             {
-                mainLogicInstance.PickBlockSet(BlockManager.instance.ingameCellBlocks
-                    [Random.Range(0, BlockManager.instance.ingameCellBlocks.Count)]);
+                mainLogicInstance.PickBlockSet(blockManagerInstance.ingameCellBlocks
+                    [Random.Range(0, blockManagerInstance.ingameCellBlocks.Count)]);
 
                 var nowPickBlock = mainLogicInstance.nowPickBlock;
                 curActionData.blockType = nowPickBlock.blockNum;
@@ -181,7 +152,7 @@ public class TenTenAI : MonoBehaviour
                 curActionData.placePosition = new Vector2Int(randNumX, randNumY);
                 parseToTilePos = TileMapManager.ChangePosToTilePos(curActionData.placePosition);
 
-                if (MainGameLogic.instance.FailCheck()) break;
+                if (mainLogicInstance.FailCheck()) break;
             } while (!mainLogicInstance.BlockDrop(parseToTilePos));
 
             curActionData.earnScoreValue = mainLogicInstance.scoreInfo.score - prevScore;
