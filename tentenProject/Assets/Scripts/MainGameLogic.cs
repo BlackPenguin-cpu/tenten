@@ -45,6 +45,8 @@ public class MainGameLogic : MonoBehaviour
     public TileMapManager tileMapManager;
     public ScoreInfo scoreInfo;
 
+    private int blockDropCount;
+    
     public class CellInfo
     {
         public BoxCollider2D cellCol;
@@ -74,7 +76,7 @@ public class MainGameLogic : MonoBehaviour
         if (nowPickBlock != null)
         {
             if (Input.GetMouseButtonUp(0))
-                BlockDrop();
+                TryBlockDrop();
             if (Input.GetMouseButton(0))
                 BlockMoving();
         }
@@ -101,13 +103,18 @@ public class MainGameLogic : MonoBehaviour
         nowPickBlock = block;
     }
 
-    private void BlockDrop()
+    private void TryBlockDrop()
     {
         var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        BlockDrop(pos);
+        TryBlockDrop(pos);
     }
 
-    public bool BlockDrop(Vector2 pos)
+    public bool TryBlockDrop(Vector2Int pos)
+    {
+        return TryBlockDrop(TileMapManager.ChangePosToTilePos(pos));
+    }
+
+    public bool TryBlockDrop(Vector2 pos)
     {
         var col = Physics2D.Raycast(pos, Vector3.forward, 100, 1 << LayerMask.NameToLayer("Tilemap"));
 
@@ -147,7 +154,7 @@ public class MainGameLogic : MonoBehaviour
 
         foreach (var cell in CellInfos)
         {
-            if (cell.isBlockPlaced == false) scoreInfo.score += 10;
+            if (cell.isBlockPlaced == false) scoreInfo.score += 5;
         }
 
         BlockManager.instance.ingameCellBlocks.Remove(nowPickBlock);
@@ -159,10 +166,11 @@ public class MainGameLogic : MonoBehaviour
             BlockManager.instance.BlockRefill();
 
         BlockClearCheck();
-        FailCheck();
+        IsFail();
 
         UIManager.instance.InfoApply(scoreInfo);
 
+        blockDropCount++;
         return true;
     }
 
@@ -202,10 +210,13 @@ public class MainGameLogic : MonoBehaviour
         }
     }
 
-    public bool FailCheck()
+    public bool IsFail()
     {
         var blockList = BlockManager.instance.ingameCellBlocks;
         bool isBlockPlacedImpossible = false;
+        if(blockDropCount >= 1000)
+            return true;
+        
         foreach (var block in blockList)
         {
             if (block == null) continue;
@@ -253,7 +264,7 @@ public class MainGameLogic : MonoBehaviour
     {
         if (!isOver)
         {
-            scoreInfo.score += 1000;
+            scoreInfo.score += 10000;
             scoreInfo.lineClearCount++;
         }
 
@@ -279,6 +290,7 @@ public class MainGameLogic : MonoBehaviour
 
     public void GameReset()
     {
+        blockDropCount = 0;
         //Tilemap CellInfo Reset
         foreach (var tile in tileMapManager.cellList)
         {

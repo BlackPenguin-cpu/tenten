@@ -2,7 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[System.Serializable]
+public struct BlockInfo
+{
+    public int blockNum;
+    public int rotNum;
 
+    public BlockInfo(int blockNum, int rotNum)
+    {
+        this.blockNum = blockNum;
+        this.rotNum = rotNum;
+    }
+}
 public class BlockManager : MonoBehaviour
 {
     public static BlockManager instance;
@@ -11,19 +22,6 @@ public class BlockManager : MonoBehaviour
 
     public Queue<BlockInfo> blockQueue = new Queue<BlockInfo>();
     private List<BlockInfo> blockPool = new List<BlockInfo>();
-
-    [System.Serializable]
-    public struct BlockInfo
-    {
-        public int blockNum;
-        public int rotNum;
-
-        public BlockInfo(int blockNum, int rotNum)
-        {
-            this.blockNum = blockNum;
-            this.rotNum = rotNum;
-        }
-    }
 
     [SerializeField] private List<CellBlock> curCellBlockPool;
 
@@ -37,15 +35,16 @@ public class BlockManager : MonoBehaviour
         ingameCellBlocks.Clear();
         foreach (var curParent in blockParent)
         {
-            //if (blockPool.Count <= 0)
-            //BlockQueueRefill();
+            if (blockQueue.Count <= 0)
+            {
+                TenTenAI.instance.BlockArrayLoad();
+            }
 
             var curBlock = blockQueue.Dequeue();
             var obj = Instantiate(curCellBlockPool[curBlock.blockNum], curParent);
 
-            obj.blockNum = curBlock.blockNum;
-            obj.rotNum = curBlock.rotNum;
-            obj.transform.Rotate(new Vector3(0, 0, obj.rotNum * 90));
+            obj.blockInfo = curBlock;
+            obj.transform.Rotate(new Vector3(0, 0, obj.blockInfo.rotNum * 90));
             ingameCellBlocks.Add(obj);
         }
     }

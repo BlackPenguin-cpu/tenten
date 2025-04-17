@@ -6024,6 +6024,7 @@ MonoBehaviour:
   lineClearCountText: {fileID: 591195899}
   blockPlaceCountText: {fileID: 1621387296}
   cellPlaceCountText: {fileID: 981757170}
+  generationCountText: {fileID: 2044378377}
 --- !u!1 &806304898
 GameObject:
   m_ObjectHideFlags: 0
@@ -8677,6 +8678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730e0d597fc58c34b8318befbba1c0f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  evolutionRepeatCount: 30
+  generationCount: 0
 --- !u!4 &1239963675
 Transform:
   m_ObjectHideFlags: 0
@@ -14435,6 +14438,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileMap: {fileID: 1782683173}
   tileMapManager: {fileID: 1782683175}
+  scoreInfo:
+    score: 0
+    lineClearCount: 0
+    cellPlaceCount: 0
+    blockPlaceCount: 0
   scoreText: {fileID: 1274715628}
   gameOverImg: {fileID: 902825373}
 --- !u!4 &2007239923

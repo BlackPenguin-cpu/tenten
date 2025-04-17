@@ -11,11 +11,13 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI lineClearCountText;
     public TextMeshProUGUI blockPlaceCountText;
     public TextMeshProUGUI cellPlaceCountText;
+    public TextMeshProUGUI generationCountText;
 
-    private const string scoreTextOriginal = "Score: {0}";
-    private const string lineClearCountTextOriginal = "LineClearCount: {0}";
-    private const string blockPlaceCountTextOriginal = "BlockPlaceCount: {0}";
-    private const string cellPlaceCountTextOriginal = "CellPlaceCount: {0}";
+    private const string scoreTextOriginal = "Score:";
+    private const string lineClearCountTextOriginal = "LineClearCount:";
+    private const string blockPlaceCountTextOriginal = "BlockPlaceCount:";
+    private const string cellPlaceCountTextOriginal = "CellPlaceCount:";
+    private const string generationCountTextOriginal = "generationCount:";
 
     private void Awake()
     {
@@ -24,9 +26,10 @@ public class UIManager : MonoBehaviour
 
     public void InfoApply(ScoreInfo scoreInfo)
     {
-        scoreText.text = string.Format(scoreTextOriginal, scoreInfo.score);
-        lineClearCountText.text = string.Format(lineClearCountTextOriginal, scoreInfo.lineClearCount);
-        blockPlaceCountText.text = string.Format(blockPlaceCountTextOriginal, scoreInfo.blockPlaceCount);
-        cellPlaceCountText.text = string.Format(cellPlaceCountTextOriginal, scoreInfo.cellPlaceCount);
+        scoreText.text = $"{scoreTextOriginal} {scoreInfo.score}";
+        lineClearCountText.text = $"{lineClearCountTextOriginal} {scoreInfo.lineClearCount}";
+        blockPlaceCountText.text = $"{blockPlaceCountTextOriginal} {scoreInfo.blockPlaceCount}";
+        cellPlaceCountText.text = $"{cellPlaceCountTextOriginal} {scoreInfo.cellPlaceCount}";
+        generationCountText.text = $"{generationCountTextOriginal} {TenTenAI.instance.generationCount}";
     }
 }
