@@ -214,7 +214,7 @@ public class MainGameLogic : MonoBehaviour
     {
         var blockList = BlockManager.instance.ingameCellBlocks;
         bool isBlockPlacedImpossible = false;
-        if(blockDropCount >= 1000)
+        if(blockDropCount >= 100)
             return true;
         
         foreach (var block in blockList)

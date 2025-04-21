@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -67,10 +68,14 @@ public class TenTenAI : MonoBehaviour
 
         foreach (var action in bestEvolution.actionDataList)
         {
-            var curBlock = blockManagerInstance.ingameCellBlocks[action.selectBlockOrderNum];
-            mainLogicInstance.PickBlockSet(curBlock);
+            blockManagerInstance.BlockPick(action.selectBlockOrderNum);
 
-            mainLogicInstance.TryBlockDrop(action.placePosition);
+            var isPlaced = mainLogicInstance.TryBlockDrop(action.placePosition);
+
+            if (!isPlaced)
+            {
+                EditorApplication.isPaused = true;
+            }
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -110,30 +115,34 @@ public class TenTenAI : MonoBehaviour
      */
     private void EvolutionLearning()
     {
-        if (curEvolutionData == null)
+        for (int j = 0; j < 50; j++)
         {
-            curEvolutionData = EvolutionGenerateFirst();
-        }
-        else
-        {
-            for (int i = 0; i < 5; i++)
-                curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[0], curEvolutionData[1]));
-            for (int i = 0; i < 5; i++)
-                curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[1], curEvolutionData[2]));
-            for (int i = 0; i < 5; i++)
-                curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[0], curEvolutionData[2]));
-            for (int i = 0; i < 5; i++)
-                curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[2], curEvolutionData[0]));
-            for (int i = 0; i < 5; i++)
-                curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[1], curEvolutionData[0]));
-            for (int i = 0; i < 5; i++)
-                curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[2], curEvolutionData[1]));
-            for (int i = 0; i < 5; i++)
-                curEvolutionData.Add(EvolutionAllRandomGenerate());
+            if (curEvolutionData == null)
+            {
+                curEvolutionData = EvolutionGenerateFirst();
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                    curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[0], curEvolutionData[1]));
+                for (int i = 0; i < 5; i++)
+                    curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[1], curEvolutionData[2]));
+                for (int i = 0; i < 5; i++)
+                    curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[0], curEvolutionData[2]));
+                for (int i = 0; i < 5; i++)
+                    curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[2], curEvolutionData[0]));
+                for (int i = 0; i < 5; i++)
+                    curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[1], curEvolutionData[0]));
+                for (int i = 0; i < 5; i++)
+                    curEvolutionData.Add(CrossEvolutionProcess(curEvolutionData[2], curEvolutionData[1]));
+                for (int i = 0; i < 5; i++)
+                    curEvolutionData.Add(EvolutionAllRandomGenerate());
+            }
+
+            EvolutionApply(curEvolutionData);
         }
 
-        SaveEvolutionData(curEvolutionData);
-        generationCount++;
+        SaveEvolutionData();
     }
 
     private DisposableList<EvolutionData> EvolutionGenerateFirst()
@@ -171,16 +180,13 @@ public class TenTenAI : MonoBehaviour
         {
             while (!mainLogicInstance.IsFail())
             {
-
                 var curActionData = actionData;
                 var prevScore = mainLogicInstance.scoreInfo.score;
 
-                var selectedBlock = blockManagerInstance.ingameCellBlocks
-                    [Mathf.Min(blockManagerInstance.ingameCellBlocks.Count - 1, actionData.selectBlockOrderNum)];
-                mainLogicInstance.PickBlockSet(selectedBlock);
+                blockManagerInstance.BlockPick(actionData.selectBlockOrderNum);
 
                 if (actionData.selectBlockOrderNum > blockManagerInstance.ingameCellBlocks.Count ||
-                    !mainLogicInstance.TryBlockDrop(actionData.placePosition) || Random.Range(0, 100) == 1)
+                    !mainLogicInstance.TryBlockDrop(actionData.placePosition) || Random.Range(0, 100) <= 5)
                 {
                     var randomAction = PlaceBlockToRandomValue();
                     curActionData = randomAction;
@@ -200,26 +206,35 @@ public class TenTenAI : MonoBehaviour
     }
 
 
-    private void SaveEvolutionData(List<EvolutionData> dataList)
+    private void SaveEvolutionData()
     {
         const string path = "EvolutionFolder";
-        var jsonData = new EvolutionDataListJson(dataList);
+        var jsonData = new EvolutionDataListJson(curEvolutionData);
         var json = JsonUtility.ToJson(jsonData);
         var fileName = $"GenerateData #{generationCount}";
 
         JsonFileSave(json, fileName, path);
-        List<EvolutionData> evolutionDataList = new List<EvolutionData>();
-        EvolutionData bestEvolutionData = jsonData.evolutionData[0];
-
-        var orderList = jsonData.evolutionData.OrderByDescending(x => x.scoreInfo.score).ToArray();
-        evolutionDataList.Add(orderList[0]);
-        evolutionDataList.Add(orderList[1]);
-        evolutionDataList.Add(orderList[2]);
-
-        curEvolutionData = evolutionDataList;
-        Debug.Log(curEvolutionData[0].scoreInfo.score);
     }
 
+    private void EvolutionApply(List<EvolutionData> evolutionDataList)
+    {
+        using var list = DisposableList<EvolutionData>.Get();
+
+        var orderList = evolutionDataList.OrderByDescending(x => x.scoreInfo.score);
+        foreach (var evolutionData in orderList)
+        {
+            list.Add(evolutionData);
+
+            if (list.Count >= 3)
+                break;
+        }
+
+        curEvolutionData.Clear();
+        curEvolutionData.AddRange(list);
+
+        generationCount++;
+        Debug.Log(curEvolutionData[0].scoreInfo.score);
+    }
 
     private EvolutionData EvolutionAllRandomGenerate()
     {
@@ -227,7 +242,6 @@ public class TenTenAI : MonoBehaviour
 
         while (!mainLogicInstance.IsFail())
         {
-
             EvolutionData.ActionData curActionData;
             var prevScore = mainLogicInstance.scoreInfo.score;
 

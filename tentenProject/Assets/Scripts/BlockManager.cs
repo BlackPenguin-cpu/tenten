@@ -14,6 +14,7 @@ public struct BlockInfo
         this.rotNum = rotNum;
     }
 }
+
 public class BlockManager : MonoBehaviour
 {
     public static BlockManager instance;
@@ -47,6 +48,12 @@ public class BlockManager : MonoBehaviour
             obj.transform.Rotate(new Vector3(0, 0, obj.blockInfo.rotNum * 90));
             ingameCellBlocks.Add(obj);
         }
+    }
+
+    public void BlockPick(int pickIndex)
+    {
+        int index = Mathf.Min(pickIndex, ingameCellBlocks.Count - 1);
+        MainGameLogic.instance.PickBlockSet(ingameCellBlocks[index]);
     }
 
     private void BlockQueueRefill()
