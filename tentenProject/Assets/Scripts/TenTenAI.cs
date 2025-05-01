@@ -16,6 +16,10 @@ public class TenTenAI : MonoBehaviour
 
     private MainGameLogic mainLogicInstance;
     private BlockManager blockManagerInstance;
+    private const string SAVE_PATH = "EvolutionFolder";
+
+
+    [SerializeField] private int generateCount;
 
     private void Awake()
     {
@@ -43,6 +47,12 @@ public class TenTenAI : MonoBehaviour
             Debug.Log("Show Best Generation");
             StartCoroutine(PlayBestGeneration());
         }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            mainLogicInstance.GameReset();
+            Debug.Log($"Load Generate #{generateCount}");
+            LoadEvolutionData();
+        }
     }
 
 
@@ -62,6 +72,15 @@ public class TenTenAI : MonoBehaviour
         fileStream.Close();
     }
 
+    private string JsonFileSave(string fileName, string path)
+    {
+        var fileStream = new StreamReader(Application.dataPath + $@"\{path}\{fileName}.json");
+        var jsonStr = fileStream.ReadToEnd();
+        fileStream.Close();
+
+        return jsonStr;
+    }
+
     private IEnumerator PlayBestGeneration()
     {
         var bestEvolution = curEvolutionData[0];
@@ -76,6 +95,7 @@ public class TenTenAI : MonoBehaviour
             {
                 EditorApplication.isPaused = true;
             }
+
             yield return new WaitForSeconds(0.1f);
         }
     }
@@ -102,12 +122,12 @@ public class TenTenAI : MonoBehaviour
         행동마다 오른 스코어를 기록
             스코어가 오르는 경우:
             BlockDrop후 빈셀의 총합   (셀 당 +10)
-            설치된 블럭의 크기   (블럭당 +100)
-            한줄 지움   (+1000)
+            설치한 블럭의 셀의 갯수   (셀당 +100)
+            한줄 지움   (+10000)
     */
     /*
      진화 규칙
-        행동당 돌연변이 확률 1%
+        행동당 돌연변이 확률 5%
         교차 기반 후 순위대로 상위 3개 유전자를 베이스기반으로 하여 모델 30개 생성
             - 더하여 5개 순수 돌연변이 모델 생성
             - 상위 3개 유전자는 변형없이 다음세대로
@@ -115,7 +135,7 @@ public class TenTenAI : MonoBehaviour
      */
     private void EvolutionLearning()
     {
-        for (int j = 0; j < 50; j++)
+        for (int j = 0; j < generateCount; j++)
         {
             if (curEvolutionData == null)
             {
@@ -208,12 +228,21 @@ public class TenTenAI : MonoBehaviour
 
     private void SaveEvolutionData()
     {
-        const string path = "EvolutionFolder";
         var jsonData = new EvolutionDataListJson(curEvolutionData);
         var json = JsonUtility.ToJson(jsonData);
         var fileName = $"GenerateData #{generationCount}";
 
-        JsonFileSave(json, fileName, path);
+        JsonFileSave(json, fileName, SAVE_PATH);
+    }
+
+    private void LoadEvolutionData()
+    {
+        var fileName = $"GenerateData #{generateCount}";
+
+        var jsonData = JsonFileSave(fileName, SAVE_PATH);
+        var data = JsonUtility.FromJson<EvolutionDataListJson>(jsonData);
+        curEvolutionData = data.evolutionData.ToList();
+        generationCount = generateCount;
     }
 
     private void EvolutionApply(List<EvolutionData> evolutionDataList)
