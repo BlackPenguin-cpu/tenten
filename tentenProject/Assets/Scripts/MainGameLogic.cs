@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
@@ -46,7 +47,7 @@ public class MainGameLogic : MonoBehaviour
     public ScoreInfo scoreInfo;
 
     private int blockDropCount;
-    
+
     public class CellInfo
     {
         public BoxCollider2D cellCol;
@@ -198,15 +199,17 @@ public class MainGameLogic : MonoBehaviour
                 }
             }
 
+            var clearBlockList = new List<CellInfo>();
+
             if (horClearBlockList.Count >= 10)
-            {
-                BlockClear(horClearBlockList);
-                BlockClearCheck();
-            }
+                clearBlockList.AddRange(horClearBlockList);
 
             if (verClearBlockList.Count >= 10)
+                clearBlockList.AddRange(verClearBlockList);
+
+            if (clearBlockList.Count > 0)
             {
-                BlockClear(verClearBlockList);
+                BlockClear(clearBlockList);
                 BlockClearCheck();
             }
 
@@ -219,9 +222,9 @@ public class MainGameLogic : MonoBehaviour
     {
         var blockList = BlockManager.instance.ingameCellBlocks;
         bool isBlockPlacedImpossible = false;
-        if(blockDropCount >= 100)
+        if (blockDropCount >= 100)
             return true;
-        
+
         foreach (var block in blockList)
         {
             if (block == null) continue;
@@ -273,16 +276,33 @@ public class MainGameLogic : MonoBehaviour
             scoreInfo.lineClearCount++;
         }
 
+        StartCoroutine(LineClearCoroutine(blockList));
+        // foreach (var block in blockList)
+        // {
+        //     block.isBlockPlaced = false;
+        //     var target = block.cellCol.transform;
+        //      target.DORotate(360 * Vector3.forward, 0.4f);
+        //      target.DOScale(0, 0.4f).onComplete = () =>
+        //      {
+        //     target.GetComponent<SpriteRenderer>().color = Color.white;
+        //          target.DOScale(0.5f, 0.1f);
+        //      };
+        // }
+    }
+
+    private IEnumerator LineClearCoroutine(List<CellInfo> blockList)
+    {
         foreach (var block in blockList)
         {
             block.isBlockPlaced = false;
             var target = block.cellCol.transform;
-             target.DORotate(360 * Vector3.forward, 0.4f);
-             target.DOScale(0, 0.4f).onComplete = () =>
-             {
-            target.GetComponent<SpriteRenderer>().color = Color.white;
-                 target.DOScale(0.5f, 0.1f);
-             };
+            target.DORotate(360 * Vector3.forward, 0.4f).Delay();
+            target.DOScale(0, 0.4f).onComplete = () =>
+            {
+                target.GetComponent<SpriteRenderer>().color = Color.white;
+                target.DOScale(0.5f, 0.1f);
+            };
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
