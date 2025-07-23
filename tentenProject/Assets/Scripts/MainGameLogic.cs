@@ -64,6 +64,11 @@ public class MainGameLogic : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        GameReset();
+    }
+
     private void Update()
     {
         UpdateInput();
@@ -272,12 +277,12 @@ public class MainGameLogic : MonoBehaviour
         {
             block.isBlockPlaced = false;
             var target = block.cellCol.transform;
-            // target.DORotate(360 * Vector3.forward, 0.4f);
-            // target.DOScale(0, 0.4f).onComplete = () =>
-            // {
+             target.DORotate(360 * Vector3.forward, 0.4f);
+             target.DOScale(0, 0.4f).onComplete = () =>
+             {
             target.GetComponent<SpriteRenderer>().color = Color.white;
-            //     target.DOScale(0.5f, 0.1f);
-            // };
+                 target.DOScale(0.5f, 0.1f);
+             };
         }
     }
 
@@ -310,7 +315,6 @@ public class MainGameLogic : MonoBehaviour
         }
 
         BlockManager.instance.ingameCellBlocks.Clear();
-        TenTenAI.instance.BlockArrayLoad();
         BlockManager.instance.BlockRefill();
 
         //GameOver UI Active false

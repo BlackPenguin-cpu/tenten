@@ -38,7 +38,8 @@ public class BlockManager : MonoBehaviour
         {
             if (blockQueue.Count <= 0)
             {
-                TenTenAI.instance.BlockArrayLoad();
+                BlockQueueRefill();
+                //TenTenAI.instance.BlockArrayLoad();
             }
 
             var curBlock = blockQueue.Dequeue();

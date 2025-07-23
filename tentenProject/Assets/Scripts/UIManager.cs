@@ -11,13 +11,11 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI lineClearCountText;
     public TextMeshProUGUI blockPlaceCountText;
     public TextMeshProUGUI cellPlaceCountText;
-    public TextMeshProUGUI generationCountText;
 
     private const string scoreTextOriginal = "Score:";
     private const string lineClearCountTextOriginal = "LineClearCount:";
     private const string blockPlaceCountTextOriginal = "BlockPlaceCount:";
     private const string cellPlaceCountTextOriginal = "CellPlaceCount:";
-    private const string generationCountTextOriginal = "generationCount:";
 
     private void Awake()
     {
@@ -30,6 +28,5 @@ public class UIManager : MonoBehaviour
         lineClearCountText.text = $"{lineClearCountTextOriginal} {scoreInfo.lineClearCount}";
         blockPlaceCountText.text = $"{blockPlaceCountTextOriginal} {scoreInfo.blockPlaceCount}";
         cellPlaceCountText.text = $"{cellPlaceCountTextOriginal} {scoreInfo.cellPlaceCount}";
-        generationCountText.text = $"{generationCountTextOriginal} {TenTenAI.instance.generationCount}";
     }
 }
