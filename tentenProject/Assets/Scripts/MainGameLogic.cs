@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public struct ScoreInfo
@@ -18,6 +20,8 @@ public class MainGameLogic : MonoBehaviour
 {
     public static MainGameLogic instance;
     [SerializeField] private GameObject tileMap;
+    [SerializeField] private Sprite normalBlockSprite;
+    [SerializeField] private TextMeshPro multiplyText;
 
     private CellInfo[,] cellInfos;
 
@@ -33,7 +37,7 @@ public class MainGameLogic : MonoBehaviour
                     for (int j = 0; j < 10; j++)
                     {
                         cellInfos[i, j] = new CellInfo();
-                        cellInfos[i, j].cellCol = tileMapManager.cellList[i + j * 10];
+                        cellInfos[i, j].cellInfo = tileMapManager.cellList[i + j * 10];
                     }
                 }
             }
@@ -50,7 +54,7 @@ public class MainGameLogic : MonoBehaviour
 
     public class CellInfo
     {
-        public BoxCollider2D cellCol;
+        public Block cellInfo;
         public bool isBlockPlaced = false;
     }
 
@@ -150,12 +154,24 @@ public class MainGameLogic : MonoBehaviour
             infos.Add(CellInfos[targetPos.x, targetPos.y]);
         }
 
+        int cellNum = 0;
         foreach (var info in infos)
         {
             info.isBlockPlaced = true;
             scoreInfo.score += 100;
             scoreInfo.cellPlaceCount++;
-            info.cellCol.GetComponent<SpriteRenderer>().color = nowPickBlock.curColor;
+            var curCell = nowPickBlock.cells[cellNum];
+            curCell.transform.Rotate(0, 0, nowPickBlock.blockInfo.rotNum * 90);
+            if (curCell.TryGetComponent(out Block block))
+            {
+                info.cellInfo.Behaviour = block.Behaviour;
+            }
+
+            info.cellInfo.GetComponent<SpriteRenderer>().color = curCell.GetComponent<SpriteRenderer>().color;
+            info.cellInfo.GetComponent<SpriteRenderer>().sprite = curCell.GetComponent<SpriteRenderer>().sprite;
+
+
+            cellNum++;
         }
 
         foreach (var cell in CellInfos)
@@ -184,6 +200,7 @@ public class MainGameLogic : MonoBehaviour
     {
         var horClearBlockList = new List<CellInfo>();
         var verClearBlockList = new List<CellInfo>();
+        var clearBlockList = new List<CellInfo>();
         for (int j = 0; j < 10; j++)
         {
             for (int i = 0; i < 10; i++)
@@ -199,7 +216,6 @@ public class MainGameLogic : MonoBehaviour
                 }
             }
 
-            var clearBlockList = new List<CellInfo>();
 
             if (horClearBlockList.Count >= 10)
                 clearBlockList.AddRange(horClearBlockList);
@@ -207,14 +223,15 @@ public class MainGameLogic : MonoBehaviour
             if (verClearBlockList.Count >= 10)
                 clearBlockList.AddRange(verClearBlockList);
 
-            if (clearBlockList.Count > 0)
-            {
-                BlockClear(clearBlockList);
-                BlockClearCheck();
-            }
 
             horClearBlockList.Clear();
             verClearBlockList.Clear();
+        }
+
+        if (clearBlockList.Count > 0)
+        {
+            BlockClear(clearBlockList);
+            BlockClearCheck();
         }
     }
 
@@ -270,32 +287,37 @@ public class MainGameLogic : MonoBehaviour
 
     private void BlockClear(List<CellInfo> blockList, bool isOver = false)
     {
+        float multiplier = 1f;
+
+        foreach (var info in blockList)
+        {
+            multiplier *= info.cellInfo.GetScoreMultiply();
+        }
+
         if (!isOver)
         {
-            scoreInfo.score += 10000;
+            scoreInfo.score += Mathf.RoundToInt(10000 * multiplier);
             scoreInfo.lineClearCount++;
         }
 
         StartCoroutine(LineClearCoroutine(blockList));
-        // foreach (var block in blockList)
-        // {
-        //     block.isBlockPlaced = false;
-        //     var target = block.cellCol.transform;
-        //      target.DORotate(360 * Vector3.forward, 0.4f);
-        //      target.DOScale(0, 0.4f).onComplete = () =>
-        //      {
-        //     target.GetComponent<SpriteRenderer>().color = Color.white;
-        //          target.DOScale(0.5f, 0.1f);
-        //      };
-        // }
     }
 
     private IEnumerator LineClearCoroutine(List<CellInfo> blockList)
     {
+        var multiplier = 1f;
         foreach (var block in blockList)
         {
+            var target = block.cellInfo.transform;
+            var curMultipler = block.cellInfo.GetScoreMultiply();
+            multiplier *= curMultipler;
+
+            if (Mathf.RoundToInt(curMultipler) != 1)
+            {
+                MultiplyTextCreate(target.transform, multiplier);
+            }
+
             block.isBlockPlaced = false;
-            var target = block.cellCol.transform;
             target.DORotate(360 * Vector3.forward, 0.4f).Delay();
             target.DOScale(0, 0.4f).onComplete = () =>
             {
@@ -303,7 +325,16 @@ public class MainGameLogic : MonoBehaviour
                 target.DOScale(0.5f, 0.1f);
             };
             yield return new WaitForSeconds(0.1f);
+
+            target.Rotate(0, 0, 0);
+            target.GetComponent<SpriteRenderer>().sprite = normalBlockSprite;
         }
+    }
+
+    private void MultiplyTextCreate(Transform pos, float multiplier)
+    {
+        var text = Instantiate(multiplyText, pos.position, Quaternion.identity);
+        text.text = $" {Mathf.Round(multiplier * 10) / 10}x";
     }
 
     private void CurBlockReset()

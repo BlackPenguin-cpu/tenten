@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class TileMapManager : MonoBehaviour
 {
-    public List<BoxCollider2D> cellList;
+    public List<Block> cellList;
     
     public static Vector2 ChangePosToTilePos(Vector2Int pos)
     {

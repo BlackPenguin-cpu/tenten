@@ -7,11 +7,16 @@ public class CellBlock : MonoBehaviour
 {
     public Color curColor;
     public BlockInfo blockInfo;
+    public List<GameObject> cells = new List<GameObject>();
+
+    [SerializeField] private GameObject cellParent;
 
     private void Start()
     {
+        GetCells();
         SetBlockColor();
     }
+
 
     private void SetBlockColor()
     {
@@ -28,16 +33,24 @@ public class CellBlock : MonoBehaviour
 
     public List<Vector2Int> GetThisBlockState()
     {
-        var cols = GetComponentsInChildren<BoxCollider2D>();
+        var cols = cellParent.GetComponentsInChildren<BoxCollider2D>();
 
         return cols.Select(col => TileMapManager.ChangeBlockPosToPos(col.transform.localPosition, blockInfo.rotNum))
             .ToList();
     }
 
+    private void GetCells()
+    {
+        for (int i = 0; i < cellParent.transform.childCount; i++)
+        {
+            cells.Add(cellParent.transform.GetChild(i).gameObject);
+        }
+    }
+
     [ContextMenu("ApplyCustomColor")]
     private void BlockColorChange()
     {
-        var renderers = GetComponentsInChildren<SpriteRenderer>();
+        var renderers = cellParent.GetComponentsInChildren<SpriteRenderer>();
         foreach (var curRen in renderers)
         {
             curRen.color = curColor;

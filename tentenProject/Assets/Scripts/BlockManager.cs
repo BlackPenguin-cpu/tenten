@@ -62,7 +62,6 @@ public class BlockManager : MonoBehaviour
         blockPool.Clear();
 
         blockPool.Add(new BlockInfo(0, 0));
-        blockPool.Add(new BlockInfo(0, 0));
         for (int i = 1; i < curCellBlockPool.Count; i++)
         {
             for (int j = 0; j < 4; j++)

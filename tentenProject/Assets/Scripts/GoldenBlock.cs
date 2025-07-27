@@ -1,17 +1,23 @@
 using UnityEngine;
 
-public class GoldenBlock : MonoBehaviour, ISpecialBlockCell
+[CreateAssetMenu(menuName = "Block/Behavior/GoldenBlock")]
+public class GoldenBlock : BlockBase
 {
-    public void OnBlockPlaced()
+    public override void OnPlaced(Block block)
+    {
+        
+    }
+
+    public override void OnTurnPassed(Block block)
     {
     }
 
-    public void OnBlockCleared()
+    public override void OnClear(Block block)
     {
     }
 
-    public virtual float GetMultiplyScore()
+    public override float GetScoreMultiply(Block block)
     {
-        return 2.0f;
+        return 2;
     }
 }
