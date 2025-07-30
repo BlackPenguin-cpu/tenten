@@ -6,6 +6,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 [System.Serializable]
 public struct ScoreInfo
@@ -170,7 +172,6 @@ public class MainGameLogic : MonoBehaviour
             info.cellInfo.GetComponent<SpriteRenderer>().color = curCell.GetComponent<SpriteRenderer>().color;
             info.cellInfo.GetComponent<SpriteRenderer>().sprite = curCell.GetComponent<SpriteRenderer>().sprite;
 
-
             cellNum++;
         }
 
@@ -196,7 +197,7 @@ public class MainGameLogic : MonoBehaviour
         return true;
     }
 
-    private void BlockClearCheck()
+    private async UniTaskVoid BlockClearCheck()
     {
         var horClearBlockList = new List<CellInfo>();
         var verClearBlockList = new List<CellInfo>();
@@ -205,12 +206,12 @@ public class MainGameLogic : MonoBehaviour
         {
             for (int i = 0; i < 10; i++)
             {
-                if (CellInfos[j, i].isBlockPlaced == true)
+                if (CellInfos[j, i].isBlockPlaced)
                 {
                     horClearBlockList.Add(CellInfos[j, i]);
                 }
 
-                if (CellInfos[i, j].isBlockPlaced == true)
+                if (CellInfos[i, j].isBlockPlaced)
                 {
                     verClearBlockList.Add(CellInfos[i, j]);
                 }
@@ -230,7 +231,7 @@ public class MainGameLogic : MonoBehaviour
 
         if (clearBlockList.Count > 0)
         {
-            BlockClear(clearBlockList);
+            await BlockClear(clearBlockList);
             BlockClearCheck();
         }
     }
@@ -285,46 +286,32 @@ public class MainGameLogic : MonoBehaviour
         gameOverImg.SetActive(true);
     }
 
-    private void BlockClear(List<CellInfo> blockList, bool isOver = false)
+    private async UniTask BlockClear(List<CellInfo> blockList, bool isOver = false)
     {
         float multiplier = 1f;
 
-        foreach (var info in blockList)
-        {
-            multiplier *= info.cellInfo.GetScoreMultiply();
-        }
-
-        if (!isOver)
-        {
-            scoreInfo.score += Mathf.RoundToInt(10000 * multiplier);
-            scoreInfo.lineClearCount++;
-        }
-
-        StartCoroutine(LineClearCoroutine(blockList));
-    }
-
-    private IEnumerator LineClearCoroutine(List<CellInfo> blockList)
-    {
-        var multiplier = 1f;
         foreach (var block in blockList)
         {
             var target = block.cellInfo.transform;
-            var curMultipler = block.cellInfo.GetScoreMultiply();
-            multiplier *= curMultipler;
+            var curMultiplier = block.cellInfo.GetScoreMultiply();
+            multiplier *= curMultiplier;
 
-            if (Mathf.RoundToInt(curMultipler) != 1)
+            if (Mathf.RoundToInt(curMultiplier) != 1)
             {
                 MultiplyTextCreate(target.transform, multiplier);
+                //TODO
+                scoreInfo.score += Mathf.RoundToInt(1000 * multiplier);
             }
 
             block.isBlockPlaced = false;
+            block.cellInfo.Behaviour = null;
             target.DORotate(360 * Vector3.forward, 0.4f).Delay();
             target.DOScale(0, 0.4f).onComplete = () =>
             {
                 target.GetComponent<SpriteRenderer>().color = Color.white;
                 target.DOScale(0.5f, 0.1f);
             };
-            yield return new WaitForSeconds(0.1f);
+            await Task.Delay(100);
 
             target.Rotate(0, 0, 0);
             target.GetComponent<SpriteRenderer>().sprite = normalBlockSprite;

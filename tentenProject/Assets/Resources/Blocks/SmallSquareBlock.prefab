@@ -297,7 +297,11 @@ MonoBehaviour:
   blockInfo:
     blockNum: 0
     rotNum: 0
-  cells: []
+  cells:
+  - {fileID: 7042652969976640671}
+  - {fileID: 8730930156595267825}
+  - {fileID: 7355946706636619557}
+  - {fileID: 847264924503712150}
   cellParent: {fileID: 2503929313241105918}
 --- !u!1 &7042652969976640671
 GameObject:

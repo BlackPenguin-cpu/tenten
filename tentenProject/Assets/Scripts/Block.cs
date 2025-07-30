@@ -17,7 +17,8 @@ public class Block : MonoBehaviour
     [ContextMenu("iconApply")]
     private void InfoApply()
     {
-        GetComponent<SpriteRenderer>().sprite = Behaviour.icon;
+        if (_behaviour != null)
+            GetComponent<SpriteRenderer>().sprite = Behaviour.icon;
     }
 
     public void OnPlace()

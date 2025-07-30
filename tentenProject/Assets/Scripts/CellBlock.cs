@@ -11,9 +11,12 @@ public class CellBlock : MonoBehaviour
 
     [SerializeField] private GameObject cellParent;
 
-    private void Start()
+    private void Awake()
     {
         GetCells();
+    }
+    private void Start()
+    {
         SetBlockColor();
     }
 
@@ -35,10 +38,11 @@ public class CellBlock : MonoBehaviour
     {
         var cols = cellParent.GetComponentsInChildren<BoxCollider2D>();
 
-        return cols.Select(col => TileMapManager.ChangeBlockPosToPos(col.transform.localPosition, blockInfo.rotNum))
+        return cols.Select(col => TileMapManager.ChangeCellPosToPos(col.transform.localPosition))
             .ToList();
     }
 
+    [ContextMenu("GetCells")]
     private void GetCells()
     {
         for (int i = 0; i < cellParent.transform.childCount; i++)

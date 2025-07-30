@@ -11,7 +11,7 @@ public class MultiplyText : MonoBehaviour
 
     private IEnumerator MoveText()
     {
-        transform.DOMoveY(0.5f, 1.5f);
+        transform.DOMoveY(1f, 1.5f);
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
     }

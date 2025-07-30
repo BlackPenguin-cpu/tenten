@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class TileMapManager : MonoBehaviour
 {
     public List<Block> cellList;
-    
+
     public static Vector2 ChangePosToTilePos(Vector2Int pos)
     {
         var startXPos = -2.5f;
@@ -12,6 +12,20 @@ public class TileMapManager : MonoBehaviour
         var xyPos = 0.55f;
 
         return new Vector2(startXPos + pos.x * xyPos, startYPos + pos.y * -xyPos);
+    }
+
+    public static Vector2 ChangePosToCellPos(Vector2Int pos)
+    {
+        var xyPos = 0.55f;
+
+        return new Vector2(pos.x * xyPos, pos.y * -xyPos);
+    }
+
+    public static Vector2Int ChangeCellPosToPos(Vector2 pos)
+    {
+        var xyPos = 0.55f;
+
+        return new Vector2Int(Mathf.RoundToInt(pos.x / xyPos), Mathf.RoundToInt(pos.y / -xyPos));
     }
 
     public static Vector2Int ChangeBlockPosToPos(Vector2 blockPos, int rotNum)
@@ -22,22 +36,20 @@ public class TileMapManager : MonoBehaviour
         Vector2Int newPos = new Vector2Int(xPos, yPos);
 
 
-        if (rotNum == 1)
+        switch (rotNum)
         {
-            newPos.y = xPos;
-            newPos.x = -yPos;
-        }
-
-        if (rotNum == 3)
-        {
-            newPos.y = -xPos;
-            newPos.x = yPos;
-        }
-
-        if (rotNum == 2)
-        {
-            newPos.x = -xPos;
-            newPos.y = -yPos;
+            case 1:
+                newPos.y = xPos;
+                newPos.x = -yPos;
+                break;
+            case 3:
+                newPos.y = -xPos;
+                newPos.x = yPos;
+                break;
+            case 2:
+                newPos.x = -xPos;
+                newPos.y = -yPos;
+                break;
         }
 
         return new Vector2Int(newPos.x, -newPos.y);

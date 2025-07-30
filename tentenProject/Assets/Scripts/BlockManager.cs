@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 [System.Serializable]
@@ -37,16 +38,18 @@ public class BlockManager : MonoBehaviour
         foreach (var curParent in blockParent)
         {
             if (blockQueue.Count <= 0)
-            {
                 BlockQueueRefill();
-                //TenTenAI.instance.BlockArrayLoad();
-            }
 
             var curBlock = blockQueue.Dequeue();
             var obj = Instantiate(curCellBlockPool[curBlock.blockNum], curParent);
 
             obj.blockInfo = curBlock;
-            obj.transform.Rotate(new Vector3(0, 0, obj.blockInfo.rotNum * 90));
+            foreach (var cell in obj.cells)
+            {
+                var cellPos = TileMapManager.ChangeBlockPosToPos(cell.transform.localPosition, obj.blockInfo.rotNum);
+                cell.transform.localPosition = TileMapManager.ChangePosToCellPos(cellPos);
+            }
+
             ingameCellBlocks.Add(obj);
         }
     }
