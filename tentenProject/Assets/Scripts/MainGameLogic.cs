@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
@@ -8,11 +9,14 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 [System.Serializable]
 public struct ScoreInfo
 {
-    public int score;
+    public BigInteger score;
     public int lineClearCount;
     public int cellPlaceCount;
     public int blockPlaceCount;
@@ -160,7 +164,7 @@ public class MainGameLogic : MonoBehaviour
         foreach (var info in infos)
         {
             info.isBlockPlaced = true;
-            scoreInfo.score += 100;
+            scoreInfo.score += 10;
             scoreInfo.cellPlaceCount++;
             var curCell = nowPickBlock.cells[cellNum];
             curCell.transform.Rotate(0, 0, nowPickBlock.blockInfo.rotNum * 90);
@@ -173,11 +177,6 @@ public class MainGameLogic : MonoBehaviour
             info.cellInfo.GetComponent<SpriteRenderer>().sprite = curCell.GetComponent<SpriteRenderer>().sprite;
 
             cellNum++;
-        }
-
-        foreach (var cell in CellInfos)
-        {
-            if (cell.isBlockPlaced == false) scoreInfo.score += 5;
         }
 
         BlockManager.instance.ingameCellBlocks.Remove(nowPickBlock);
@@ -296,26 +295,32 @@ public class MainGameLogic : MonoBehaviour
             var curMultiplier = block.cellInfo.GetScoreMultiply();
             multiplier *= curMultiplier;
 
+            block.isBlockPlaced = false;
+            block.cellInfo.Behaviour = null;
+            target.DORotate(180 * Vector3.forward, 0.1f).onComplete = () =>
+            {
+                target.DORotate(360 * Vector3.forward, 0.1f).onComplete = () =>
+                    target.Rotate(0, 0, 0);
+            };
+            target.DOScale(0, 0.1f).onComplete = () =>
+            {
+                target.GetComponent<SpriteRenderer>().color = Color.white;
+                target.DOScale(0.5f, 0.05f);
+            };
+
+            scoreInfo.score += Mathf.RoundToInt(block.cellInfo.GetBaseScore() * multiplier);
             if (Mathf.RoundToInt(curMultiplier) != 1)
             {
                 MultiplyTextCreate(target.transform, multiplier);
-                //TODO
-                scoreInfo.score += Mathf.RoundToInt(1000 * multiplier);
+                await Task.Delay(300);
+                UIManager.instance.InfoApply(scoreInfo);
             }
 
-            block.isBlockPlaced = false;
-            block.cellInfo.Behaviour = null;
-            target.DORotate(360 * Vector3.forward, 0.4f).Delay();
-            target.DOScale(0, 0.4f).onComplete = () =>
-            {
-                target.GetComponent<SpriteRenderer>().color = Color.white;
-                target.DOScale(0.5f, 0.1f);
-            };
-            await Task.Delay(100);
-
-            target.Rotate(0, 0, 0);
+            await Task.Delay(30);
             target.GetComponent<SpriteRenderer>().sprite = normalBlockSprite;
         }
+
+        UIManager.instance.InfoApply(scoreInfo);
     }
 
     private void MultiplyTextCreate(Transform pos, float multiplier)

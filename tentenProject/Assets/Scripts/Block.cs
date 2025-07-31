@@ -42,4 +42,10 @@ public class Block : MonoBehaviour
             ? Behaviour.GetScoreMultiply(this)
             : 1;
     }
+    public float GetBaseScore()
+    {
+        return Behaviour != null
+            ? Behaviour.baseScore
+            : 50;
+    }
 }
