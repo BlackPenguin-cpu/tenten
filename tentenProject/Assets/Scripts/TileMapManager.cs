@@ -1,9 +1,57 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using UnityEditor.VersionControl;
+using Task = System.Threading.Tasks.Task;
 
 public class TileMapManager : MonoBehaviour
 {
     public List<Block> cellList;
+
+    private void Start()
+    {
+        StartInitialize();
+    }
+
+    private void OnTurnPassAction()
+    {
+        foreach (var cell in cellList)
+        {
+                cell.OnTurnPass();
+        }
+    }
+    private async UniTaskVoid StartInitialize()
+    {
+        var originScale = cellList[0].transform.localScale;
+        foreach (var cell in cellList)
+        {
+            cell.transform.localScale = new Vector3(0, 0, 0);
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < i + 1; j++)
+            {
+                cellList[(i - j) * 10 + j].transform.DOScale(originScale, 0.1f);
+            }
+
+            await Task.Delay(10);
+        }
+
+        int targetNum = 0;
+        for (int i = 0; i < 10; i++)
+        {
+            targetNum = 90;
+            while (targetNum > 0)
+            {
+                cellList[targetNum + i].transform.DOScale(originScale, 0.1f);
+                targetNum -= 9;
+            }
+            await Task.Delay(10);
+        }
+
+    }
 
     public static Vector2 ChangePosToTilePos(Vector2Int pos)
     {

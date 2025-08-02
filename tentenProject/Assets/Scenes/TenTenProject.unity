@@ -15906,7 +15906,6 @@ MonoBehaviour:
   multiplyText: {fileID: 1215027374054141342, guid: 70805cd50e8d6d44a9507e15bb914999, type: 3}
   tileMapManager: {fileID: 1782683175}
   scoreInfo:
-    score: 0
     lineClearCount: 0
     cellPlaceCount: 0
     blockPlaceCount: 0
