@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Unity.Android.Types;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -179,6 +180,13 @@ public class MainGameLogic : MonoBehaviour
             cellNum++;
         }
 
+        foreach (var obj in nowPickBlock.cells)
+        {
+            if (obj.TryGetComponent(out Block block))
+            {
+                block.OnPlace();
+            }
+        }
         BlockManager.instance.ingameCellBlocks.Remove(nowPickBlock);
         Destroy(nowPickBlock.gameObject);
         nowPickBlock = null;
@@ -193,6 +201,7 @@ public class MainGameLogic : MonoBehaviour
         UIManager.instance.InfoApply(scoreInfo);
 
         blockDropCount++;
+        tileMapManager.OnTurnPassAction();
         return true;
     }
 
@@ -317,6 +326,7 @@ public class MainGameLogic : MonoBehaviour
             }
 
             await Task.Delay(30);
+            block.cellInfo.OnClearBlock();
             target.GetComponent<SpriteRenderer>().sprite = normalBlockSprite;
         }
 

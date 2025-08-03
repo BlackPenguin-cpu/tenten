@@ -14,13 +14,14 @@ public class TileMapManager : MonoBehaviour
         StartInitialize();
     }
 
-    private void OnTurnPassAction()
+    public void OnTurnPassAction()
     {
         foreach (var cell in cellList)
         {
-                cell.OnTurnPass();
+            cell.OnTurnPass();
         }
     }
+
     private async UniTaskVoid StartInitialize()
     {
         var originScale = cellList[0].transform.localScale;
@@ -48,9 +49,9 @@ public class TileMapManager : MonoBehaviour
                 cellList[targetNum + i].transform.DOScale(originScale, 0.1f);
                 targetNum -= 9;
             }
+
             await Task.Delay(10);
         }
-
     }
 
     public static Vector2 ChangePosToTilePos(Vector2Int pos)

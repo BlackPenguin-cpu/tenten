@@ -45,6 +45,7 @@ public class CellBlock : MonoBehaviour
     [ContextMenu("GetCells")]
     private void GetCells()
     {
+        cells = new List<GameObject>();
         for (int i = 0; i < cellParent.transform.childCount; i++)
         {
             cells.Add(cellParent.transform.GetChild(i).gameObject);
