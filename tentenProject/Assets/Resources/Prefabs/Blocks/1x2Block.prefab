@@ -217,6 +217,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: NormalCell
       objectReference: {fileID: 0}
+    - target: {fileID: 8964775895825425952, guid: 96c8eacefe2b4eb4782ec554013ff74b, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964775895825425952, guid: 96c8eacefe2b4eb4782ec554013ff74b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7911868
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964775895825425952, guid: 96c8eacefe2b4eb4782ec554013ff74b, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -283,6 +295,18 @@ PrefabInstance:
     - target: {fileID: 4371371422124201176, guid: 96c8eacefe2b4eb4782ec554013ff74b, type: 3}
       propertyPath: m_Name
       value: NormalCell (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964775895825425952, guid: 96c8eacefe2b4eb4782ec554013ff74b, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964775895825425952, guid: 96c8eacefe2b4eb4782ec554013ff74b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7911868
+      objectReference: {fileID: 0}
+    - target: {fileID: 8964775895825425952, guid: 96c8eacefe2b4eb4782ec554013ff74b, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

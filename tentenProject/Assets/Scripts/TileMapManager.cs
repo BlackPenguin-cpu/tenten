@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using UnityEditor.VersionControl;
 using Task = System.Threading.Tasks.Task;
 
 public class TileMapManager : MonoBehaviour
@@ -18,7 +17,7 @@ public class TileMapManager : MonoBehaviour
     {
         foreach (var cell in cellList)
         {
-            cell.OnTurnPass();
+            cell.OnTurnPass(cellList, ChangeTilePosToPos(cell.transform.position));
         }
     }
 

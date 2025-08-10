@@ -1,15 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using DG.Tweening;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Unity.Android.Types;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -184,9 +179,10 @@ public class MainGameLogic : MonoBehaviour
         {
             if (obj.TryGetComponent(out Block block))
             {
-                block.OnPlace();
+                block.OnPlace(tileMapManager.cellList, TileMapManager.ChangeTilePosToPos(block.transform.position));
             }
         }
+
         BlockManager.instance.ingameCellBlocks.Remove(nowPickBlock);
         Destroy(nowPickBlock.gameObject);
         nowPickBlock = null;
@@ -196,7 +192,6 @@ public class MainGameLogic : MonoBehaviour
             BlockManager.instance.BlockRefill();
 
         BlockClearCheck();
-        IsFail();
 
         UIManager.instance.InfoApply(scoreInfo);
 
@@ -242,6 +237,8 @@ public class MainGameLogic : MonoBehaviour
             await BlockClear(clearBlockList);
             BlockClearCheck();
         }
+
+        IsFail();
     }
 
     public bool IsFail()
@@ -294,43 +291,66 @@ public class MainGameLogic : MonoBehaviour
         gameOverImg.SetActive(true);
     }
 
-    private async UniTask BlockClear(List<CellInfo> blockList, bool isOver = false)
+    public async UniTask BlockClear(List<Vector2Int> posList)
+    {
+        var cellInfos = new List<CellInfo>();
+        foreach (var pos in posList)
+        {
+            if (pos.x < 0 || pos.y < 0 ||pos.x >= 10 || pos.y >= 10) continue;
+            cellInfos.Add(CellInfos[pos.x, pos.y]);
+        }
+
+        await BlockClear(cellInfos, true);
+    }
+
+    public async UniTask BlockClear(List<CellInfo> blockList, bool isNonDelay = false)
     {
         float multiplier = 1f;
 
         foreach (var block in blockList)
         {
+            if (!block.cellInfo) continue;
             var target = block.cellInfo.transform;
             var curMultiplier = block.cellInfo.GetScoreMultiply();
+
+            ClearBlockAnim(target, 0.2f);
+
+            if (!block.isBlockPlaced) continue;
+
             multiplier *= curMultiplier;
-
-            block.isBlockPlaced = false;
-            block.cellInfo.Behaviour = null;
-            target.DORotate(180 * Vector3.forward, 0.1f).onComplete = () =>
-            {
-                target.DORotate(360 * Vector3.forward, 0.1f).onComplete = () =>
-                    target.Rotate(0, 0, 0);
-            };
-            target.DOScale(0, 0.1f).onComplete = () =>
-            {
-                target.GetComponent<SpriteRenderer>().color = Color.white;
-                target.DOScale(0.5f, 0.05f);
-            };
-
             scoreInfo.score += Mathf.RoundToInt(block.cellInfo.GetBaseScore() * multiplier);
             if (Mathf.RoundToInt(curMultiplier) != 1)
             {
                 MultiplyTextCreate(target.transform, multiplier);
-                await Task.Delay(300);
+                if (!isNonDelay)
+                    await Task.Delay(200);
                 UIManager.instance.InfoApply(scoreInfo);
             }
 
-            await Task.Delay(30);
-            block.cellInfo.OnClearBlock();
+            if (!isNonDelay)
+                await Task.Delay(10);
+            await block.cellInfo.OnClearBlock(tileMapManager.cellList,
+                TileMapManager.ChangeTilePosToPos(target.position));
+            block.isBlockPlaced = false;
+            block.cellInfo.Behaviour = null;
             target.GetComponent<SpriteRenderer>().sprite = normalBlockSprite;
         }
 
         UIManager.instance.InfoApply(scoreInfo);
+    }
+
+    private void ClearBlockAnim(Transform target, float duration)
+    {
+        target.DORotate(180 * Vector3.forward, duration / 2).onComplete = () =>
+        {
+            target.DORotate(360 * Vector3.forward, duration / 2).onComplete = () =>
+                target.Rotate(0, 0, 0);
+        };
+        target.DOScale(0, duration / 2).onComplete = () =>
+        {
+            target.GetComponent<SpriteRenderer>().color = Color.white;
+            target.DOScale(0.5f, duration / 4);
+        };
     }
 
     private void MultiplyTextCreate(Transform pos, float multiplier)

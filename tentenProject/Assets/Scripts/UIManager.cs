@@ -35,7 +35,9 @@ public class UIManager : MonoBehaviour
         if (coroutine != null)
         {
             StopCoroutine(coroutine);
+            scoreText.transform.Rotate(Vector3.zero);
         }
+
         coroutine = StartCoroutine(ScoreTextAnim(scoreInfo.score));
 
         lineClearCountText.text = $"{lineClearCountTextOriginal} {scoreInfo.lineClearCount}";
@@ -43,15 +45,14 @@ public class UIManager : MonoBehaviour
         cellPlaceCountText.text = $"{cellPlaceCountTextOriginal} {scoreInfo.cellPlaceCount}";
     }
 
-    private IEnumerator ScoreTextAnim(BigInteger target, float duration = 0.15f)
+    private IEnumerator ScoreTextAnim(BigInteger target, float duration = 0.3f)
     {
         scoreText.text = "";
         var str = target.ToString();
 
         if (target - nowScore >= 1000)
         {
-            scoreText.transform.DOShakeRotation(0.15f, 40, 50, 360).onComplete = () =>
-                scoreText.transform.Rotate(Vector3.zero);
+            scoreText.transform.DOShakeRotation(duration, 40, 50, 360);
         }
 
         nowScore = target;
@@ -61,6 +62,8 @@ public class UIManager : MonoBehaviour
             scoreText.text += str[i];
             yield return waitSec;
         }
+
+        scoreText.transform.Rotate(Vector3.zero);
     }
     // private IEnumerator ScoreCount(int target, float duration = 0.5f)
     // {

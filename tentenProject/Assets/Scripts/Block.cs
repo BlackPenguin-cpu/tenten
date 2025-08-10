@@ -1,7 +1,11 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    public bool alreadyUsed = false;
     [SerializeField] private BlockBase _behaviour;
 
     public BlockBase Behaviour
@@ -9,6 +13,8 @@ public class Block : MonoBehaviour
         get => _behaviour ? _behaviour : null;
         set
         {
+            if(_behaviour != value)
+                alreadyUsed = false;
             _behaviour = value;
             InfoApply();
         }
@@ -21,19 +27,26 @@ public class Block : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = Behaviour.icon;
     }
 
-    public void OnPlace()
+    public void OnPlace(List<Block> cellList, Vector2Int cellPos)
     {
-        Behaviour?.OnPlaced(this);
+        Behaviour?.OnPlaced(cellList, cellPos);
     }
 
-    public void OnTurnPass()
+    public void OnTurnPass(List<Block> cellList, Vector2Int cellPos)
     {
-        Behaviour?.OnTurnPassed(this);
+        Behaviour?.OnTurnPassed(cellList, cellPos);
     }
 
-    public void OnClearBlock()
+    public async UniTask OnClearBlock(List<Block> cellList, Vector2Int cellPos)
     {
-        Behaviour?.OnClear(this);
+        if(alreadyUsed) return;
+        alreadyUsed = true;
+        
+        if (Behaviour != null)
+            await Behaviour.OnClear(cellList, cellPos);
+        
+        Behaviour = null;
+        alreadyUsed = false;
     }
 
     public float GetScoreMultiply()
@@ -42,6 +55,7 @@ public class Block : MonoBehaviour
             ? Behaviour.GetScoreMultiply(this)
             : 1;
     }
+
     public float GetBaseScore()
     {
         return Behaviour != null

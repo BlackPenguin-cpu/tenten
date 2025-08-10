@@ -246,7 +246,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -266,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &33451494
 GameObject:
@@ -394,7 +395,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -414,6 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &36550968
 GameObject:
@@ -542,7 +544,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -562,6 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &61620176
 GameObject:
@@ -690,7 +693,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -710,6 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &137672564
 GameObject:
@@ -838,7 +842,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -858,6 +862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &191034920
 GameObject:
@@ -1027,7 +1032,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1047,6 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &205063645
 GameObject:
@@ -1175,7 +1181,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1195,6 +1201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &227466016
 GameObject:
@@ -1323,7 +1330,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1343,6 +1350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &228093451
 GameObject:
@@ -1471,7 +1479,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1491,6 +1499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &289892235
 GameObject:
@@ -1619,7 +1628,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1639,6 +1648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &304501638
 GameObject:
@@ -1808,7 +1818,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1828,6 +1838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &312706879
 GameObject:
@@ -1956,7 +1967,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1976,6 +1987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &328446660
 GameObject:
@@ -2104,7 +2116,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2124,6 +2136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &335038460
 GameObject:
@@ -2252,7 +2265,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2272,6 +2285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &355088828
 GameObject:
@@ -2400,7 +2414,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2420,6 +2434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &356589697
 GameObject:
@@ -2548,7 +2563,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2568,6 +2583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &404980532
 GameObject:
@@ -2696,7 +2712,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2716,6 +2732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &424275655
 GameObject:
@@ -2844,7 +2861,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2864,6 +2881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &426240665
 GameObject:
@@ -2992,7 +3010,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3012,6 +3030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &451871812
 GameObject:
@@ -3048,7 +3067,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 400}
+  m_SizeDelta: {x: 0, y: 850}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &451871814
 MonoBehaviour:
@@ -3215,7 +3234,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3235,6 +3254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &507042843
 GameObject:
@@ -3363,7 +3383,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3383,6 +3403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &507634568
 GameObject:
@@ -3511,7 +3532,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3531,6 +3552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &509864494
 GameObject:
@@ -3659,7 +3681,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3679,6 +3701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
@@ -3944,7 +3967,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3964,6 +3987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &543473791
 GameObject:
@@ -4092,7 +4116,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4112,6 +4136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &544027647
 GameObject:
@@ -4240,7 +4265,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4260,6 +4285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &551467882
 GameObject:
@@ -4429,7 +4455,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4449,6 +4475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &591195897
 GameObject:
@@ -4713,7 +4740,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4733,6 +4760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &606793228
 GameObject:
@@ -4861,7 +4889,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4881,6 +4909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &609001789
 GameObject:
@@ -5009,7 +5038,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5029,6 +5058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
@@ -5162,10 +5192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -5343,7 +5373,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5363,6 +5393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &661549706
 GameObject:
@@ -5491,7 +5522,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5511,6 +5542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &663081202
 GameObject:
@@ -5639,7 +5671,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5659,6 +5691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &671653582
 GameObject:
@@ -5787,7 +5820,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5807,6 +5840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &679815480
 GameObject:
@@ -5935,7 +5969,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5955,6 +5989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &711049497
 GameObject:
@@ -6083,7 +6118,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6103,6 +6138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &735398574
 GameObject:
@@ -6231,7 +6267,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6251,6 +6287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &747027352
 GameObject:
@@ -6379,7 +6416,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6399,6 +6436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &764046535
 GameObject:
@@ -6527,7 +6565,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6547,6 +6585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &782929537
 GameObject:
@@ -6798,7 +6837,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6818,6 +6857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &847845435
 GameObject:
@@ -6946,7 +6986,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6966,6 +7006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &902825373
 GameObject:
@@ -7170,7 +7211,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7190,6 +7231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &946584655
 GameObject:
@@ -7318,7 +7360,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7338,6 +7380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &970462198
 GameObject:
@@ -7466,7 +7509,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7486,6 +7529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &971754458
 GameObject:
@@ -7614,7 +7658,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7634,6 +7678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &981757168
 GameObject:
@@ -7898,7 +7943,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7918,6 +7963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &988957251
 GameObject:
@@ -8046,7 +8092,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8066,6 +8112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &992733896
 GameObject:
@@ -8194,7 +8241,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8214,6 +8261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1051180353
 GameObject:
@@ -8342,7 +8390,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8362,6 +8410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1073391280
 GameObject:
@@ -8490,7 +8539,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8510,6 +8559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1097602220
 GameObject:
@@ -8638,7 +8688,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8658,6 +8708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1101063298
 GameObject:
@@ -8786,7 +8837,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -8806,6 +8857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1124954080
 GameObject:
@@ -9009,7 +9061,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9029,6 +9081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1172019632
 GameObject:
@@ -9157,7 +9210,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9177,6 +9230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1181065331
 GameObject:
@@ -9305,7 +9359,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9325,6 +9379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1212987148
 GameObject:
@@ -9453,7 +9508,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9473,6 +9528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1215184873
 GameObject:
@@ -9601,7 +9657,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9621,6 +9677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1248688146
 GameObject:
@@ -9749,7 +9806,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9769,6 +9826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1267868170
 GameObject:
@@ -9897,7 +9955,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -9917,6 +9975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1274715626
 GameObject:
@@ -10215,7 +10274,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -10235,6 +10294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1305405622
 GameObject:
@@ -10404,7 +10464,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -10424,6 +10484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1401115231
 GameObject:
@@ -10552,7 +10613,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -10572,6 +10633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1441138873
 GameObject:
@@ -10700,7 +10762,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -10720,6 +10782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1446859448
 GameObject:
@@ -10848,7 +10911,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -10868,6 +10931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1450131835
 GameObject:
@@ -10996,7 +11060,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -11016,6 +11080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1451059732
 GameObject:
@@ -11144,7 +11209,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -11164,6 +11229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1460498306
 GameObject:
@@ -11292,7 +11358,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -11312,6 +11378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1463893580
 GameObject:
@@ -11481,7 +11548,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -11501,6 +11568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1474125542
 GameObject:
@@ -11629,7 +11697,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -11649,6 +11717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1520791789
 GameObject:
@@ -11777,7 +11846,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -11797,6 +11866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1522499232
 GameObject:
@@ -12004,7 +12074,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -12024,6 +12094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1553510632
 GameObject:
@@ -12152,7 +12223,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -12172,6 +12243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1563779747
 GameObject:
@@ -12382,7 +12454,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -12402,6 +12474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1568109449
 GameObject:
@@ -12530,7 +12603,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -12550,6 +12623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1570832182
 GameObject:
@@ -12719,7 +12793,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -12739,6 +12813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1617399801
 GameObject:
@@ -12867,7 +12942,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -12887,6 +12962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1621387294
 GameObject:
@@ -13151,7 +13227,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13171,6 +13247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1656291420
 GameObject:
@@ -13435,7 +13512,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13455,6 +13532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1731586527
 GameObject:
@@ -13583,7 +13661,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13603,6 +13681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1734878018
 GameObject:
@@ -13731,7 +13810,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13751,6 +13830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1752493825
 GameObject:
@@ -13879,7 +13959,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -13899,6 +13979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1782683173
 GameObject:
@@ -14182,7 +14263,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -14202,6 +14283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1820950852
 GameObject:
@@ -14371,7 +14453,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -14391,6 +14473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1844394791
 GameObject:
@@ -14519,7 +14602,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -14539,6 +14622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1858269860
 GameObject:
@@ -14667,7 +14751,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -14687,6 +14771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1866953761
 GameObject:
@@ -14815,7 +14900,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -14835,6 +14920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1876795766
 GameObject:
@@ -14963,7 +15049,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -14983,6 +15069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1879324836
 GameObject:
@@ -15111,7 +15198,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15131,6 +15218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1879436071
 GameObject:
@@ -15259,7 +15347,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15279,6 +15367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1910786203
 GameObject:
@@ -15407,7 +15496,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15427,6 +15516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1934193705
 GameObject:
@@ -15555,7 +15645,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15575,6 +15665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1941062516
 GameObject:
@@ -15703,7 +15794,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15723,6 +15814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &1997006446
 GameObject:
@@ -15851,7 +15943,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -15871,6 +15963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &2007239921
 GameObject:
@@ -16053,7 +16146,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -16073,6 +16166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &2057415593
 GameObject:
@@ -16201,7 +16295,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -16221,6 +16315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &2102408719
 GameObject:
@@ -16311,10 +16406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -16492,7 +16587,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -16512,6 +16607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &2129299869
 GameObject:
@@ -16702,7 +16798,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -16722,6 +16818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &2136816501
 GameObject:
@@ -16850,7 +16947,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -16870,6 +16967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &2145895817
 GameObject:
@@ -16998,7 +17096,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -17018,6 +17116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &2146063779
 GameObject:
@@ -17146,7 +17245,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.9230769, y: 0.9230769}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -17166,6 +17265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b072b281710f9d447a5417a51668d0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alreadyUsed: 0
   _behaviour: {fileID: 0}
 --- !u!1 &5247737018067618542
 GameObject:

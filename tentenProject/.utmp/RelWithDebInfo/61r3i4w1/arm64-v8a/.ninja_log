@@ -10,3 +10,14 @@
 398	3249	7627929133819461	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	94ea66a6356f69cc
 123	3401	7627929135325466	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	6b69e44af52cd58
 3401	3764	7627929138924764	C:/Users/User/tenten/tentenProject/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/61r3i4w1/obj/arm64-v8a/libgame.so	2aebe120bc3c7723
+540	1296	7764478859951547	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	9e617143ead53c10
+1298	2917	7764478874426935	C:/Users/User/tenten/tentenProject/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/61r3i4w1/obj/arm64-v8a/libswappywrapper.so	194fce3d95631c24
+21	3562	7764478882149870	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	2ec9c3dbc1cc1017
+251	3678	7764478883512812	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	20dd0481fe2aa8c4
+389	4147	7764478888191256	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	cb6f879f69593b82
+127	4195	7764478888221260	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	df4febfd60ab0b65
+317	4220	7764478888803077	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	e066ba0427ccb6f5
+462	4643	7764478892760246	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	54af362182f21a96
+190	5284	7764478899516420	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	94ea66a6356f69cc
+76	5479	7764478901624189	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	6b69e44af52cd58
+5480	6373	7764478909661407	C:/Users/User/tenten/tentenProject/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/61r3i4w1/obj/arm64-v8a/libgame.so	2aebe120bc3c7723
