@@ -1,25 +1,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Block/Behavior/CrossBomb")]
-public class CrossBomb : BlockBase
+public class RuntimeCrossBomb : IBlockRuntime
 {
-    public override void OnPlaced(List<Block> cellList, Vector2Int cellPos)
+    private readonly CrossBomb data;
+
+    public RuntimeCrossBomb(CrossBomb data)
+    {
+        this.data = data;
+    }
+
+    public void OnPlaced(Vector2Int pos)
     {
     }
 
-    public override void OnTurnPassed(List<Block> cellList, Vector2Int cellPos)
+    public void OnTurnPassed(Vector2Int pos)
     {
     }
 
-    public override async UniTask OnClear(List<Block> blocks, Vector2Int cellPos)
+    public async UniTask OnClear(Vector2Int pos)
     {
         List<Vector2Int> posList = new List<Vector2Int>();
-        var xPos = cellPos.x;
-        var yPos = cellPos.y;
+        var xPos = pos.x;
+        var yPos = pos.y;
         int targetPos = 0;
         while (targetPos < 10)
         {
@@ -36,14 +41,15 @@ public class CrossBomb : BlockBase
 
         var distinctPosList = posList.Distinct().ToList();
         distinctPosList.Remove(new Vector2Int(xPos, yPos));
-        
-        await UniTask.Delay(100);
-        Instantiate(onClearEffect, TileMapManager.ChangePosToTilePos(new Vector2Int(xPos, yPos)), Quaternion.identity);
+
+        Object.Instantiate(data.onClearEffect, TileMapManager.ChangePosToTilePos(new Vector2Int(xPos, yPos)),
+            Quaternion.identity);
         await MainGameLogic.instance.BlockClear(distinctPosList);
+        await UniTask.Delay(400);
     }
 
 
-    public override float GetScoreMultiply(Block block)
+    public float GetScoreMultiply()
     {
         return 1;
     }

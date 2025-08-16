@@ -1,11 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Numerics;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Vector3 = UnityEngine.Vector3;
 
 public class UIManager : MonoBehaviour
@@ -24,6 +23,9 @@ public class UIManager : MonoBehaviour
     private const string cellPlaceCountTextOriginal = "CellPlaceCount:";
 
     private Coroutine coroutine;
+    private CancellationTokenSource _cts = new CancellationTokenSource();
+
+    private UniTask thread;
 
     private void Awake()
     {
@@ -32,55 +34,51 @@ public class UIManager : MonoBehaviour
 
     public void InfoApply(ScoreInfo scoreInfo)
     {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            scoreText.transform.Rotate(Vector3.zero);
-        }
+        _cts.Cancel();
+        _cts.Dispose();
+        _cts = new CancellationTokenSource();
 
-        coroutine = StartCoroutine(ScoreTextAnim(scoreInfo.score));
+        thread = ScoreTextAnim(scoreInfo.score);
 
         lineClearCountText.text = $"{lineClearCountTextOriginal} {scoreInfo.lineClearCount}";
         blockPlaceCountText.text = $"{blockPlaceCountTextOriginal} {scoreInfo.blockPlaceCount}";
         cellPlaceCountText.text = $"{cellPlaceCountTextOriginal} {scoreInfo.cellPlaceCount}";
     }
 
-    private IEnumerator ScoreTextAnim(BigInteger target, float duration = 0.3f)
+    private async UniTask ScoreTextAnim(BigInteger target, float duration = 0.3f)
     {
         scoreText.text = "";
         var str = target.ToString();
 
-        if (target - nowScore >= 1000)
+        if (target - nowScore >= 100)
         {
-            scoreText.transform.DOShakeRotation(duration, 40, 50, 360);
+            scoreText.transform.DOShakeRotation(duration, 100,90, 360)
+                .onComplete += () => { scoreText.transform.rotation = quaternion.identity; };
         }
 
         nowScore = target;
-        var waitSec = new WaitForSeconds(duration / str.Length);
-        for (int i = 0; i < str.Length; i++)
+        await TextAnim(scoreText, str, duration, _cts.Token);
+    }
+
+    public static async UniTask TextAnim(TMP_Text targetObj, string text, float duration = 0.3f,
+        CancellationToken token = default)
+    {
+        var ct = CancellationToken.None;
+        if (token == default)
+            ct = targetObj.GetCancellationTokenOnDestroy();
+        else
         {
-            scoreText.text += str[i];
-            yield return waitSec;
+            var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
+                token, targetObj.GetCancellationTokenOnDestroy());
+            ct = linkedCts.Token;
         }
 
-        scoreText.transform.Rotate(Vector3.zero);
+        targetObj.text = "";
+        foreach (var t in text)
+        {
+            ct.ThrowIfCancellationRequested();
+            targetObj.text += t;
+            await UniTask.WaitForSeconds(duration / text.Length, cancellationToken: ct);
+        }
     }
-    // private IEnumerator ScoreCount(int target, float duration = 0.5f)
-    // {
-    //     if (target - nowScore >= 10000)
-    //         scoreText.transform.DOShakePosition(duration, 20, 50,360);
-    //
-    //     float current = nowScore;
-    //     float offset = (target - current) / duration;
-    //
-    //     while (current < target)
-    //     {
-    //         current += offset * Time.deltaTime;
-    //         scoreText.text = ((int)current).ToString();
-    //         yield return null;
-    //     }
-    //
-    //     nowScore = target;
-    //     scoreText.text = ((int)current).ToString();
-    // }
 }

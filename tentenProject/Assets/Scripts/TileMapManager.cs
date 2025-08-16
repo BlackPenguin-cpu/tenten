@@ -17,15 +17,17 @@ public class TileMapManager : MonoBehaviour
     {
         foreach (var cell in cellList)
         {
-            cell.OnTurnPass(cellList, ChangeTilePosToPos(cell.transform.position));
+            cell.OnTurnPass();
         }
     }
 
     private async UniTaskVoid StartInitialize()
     {
         var originScale = cellList[0].transform.localScale;
-        foreach (var cell in cellList)
+        for (int i = 0; i < cellList.Count; i++)
         {
+            var cell = cellList[i];
+            cell.pos = new Vector2Int(i % 10, i / 10);
             cell.transform.localScale = new Vector3(0, 0, 0);
         }
 

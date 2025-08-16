@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    public Vector2Int pos;
     public bool alreadyUsed = false;
     [SerializeField] private BlockBase _behaviour;
+    private IBlockRuntime _runtimeBlock;
 
     public BlockBase Behaviour
     {
         get => _behaviour ? _behaviour : null;
         set
         {
-            if(_behaviour != value)
+            if (_behaviour != value)
                 alreadyUsed = false;
             _behaviour = value;
+            
+            _runtimeBlock = _behaviour != null ? value.CreateRuntime() : null;
             InfoApply();
         }
     }
@@ -27,32 +31,33 @@ public class Block : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = Behaviour.icon;
     }
 
-    public void OnPlace(List<Block> cellList, Vector2Int cellPos)
+    public void OnPlace()
     {
-        Behaviour?.OnPlaced(cellList, cellPos);
+        _runtimeBlock?.OnPlaced(pos);
     }
 
-    public void OnTurnPass(List<Block> cellList, Vector2Int cellPos)
+    public void OnTurnPass()
     {
-        Behaviour?.OnTurnPassed(cellList, cellPos);
+        _runtimeBlock?.OnTurnPassed(pos);
     }
 
-    public async UniTask OnClearBlock(List<Block> cellList, Vector2Int cellPos)
+    public async UniTask OnClearBlock()
     {
-        if(alreadyUsed) return;
+        if (alreadyUsed) return;
         alreadyUsed = true;
-        
+
         if (Behaviour != null)
-            await Behaviour.OnClear(cellList, cellPos);
-        
+            await _runtimeBlock.OnClear(pos);
+
         Behaviour = null;
+        _runtimeBlock = null;
         alreadyUsed = false;
     }
 
     public float GetScoreMultiply()
     {
         return Behaviour != null
-            ? Behaviour.GetScoreMultiply(this)
+            ? _runtimeBlock.GetScoreMultiply()
             : 1;
     }
 

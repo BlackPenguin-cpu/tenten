@@ -28,10 +28,11 @@ public abstract class BlockBase : ScriptableObject
     public EBlockCellRank cellRank;
     public EBlockType cellType;
     public float baseScore = 50f;
-    
-    public abstract void OnPlaced(List<Block> cellList,Vector2Int cellPos);
-    public abstract void OnTurnPassed(List<Block> cellList,Vector2Int cellPos);
-    public abstract UniTask OnClear(List<Block> cellList,Vector2Int cellPos);
-    public abstract float GetScoreMultiply(Block block);
-    
+
+    public abstract IBlockRuntime CreateRuntime();
+
+    // public abstract void OnPlaced(Vector2Int pos);
+    // public abstract void OnTurnPassed(Vector2Int pos);
+    // public abstract UniTask OnClear(Vector2Int pos);
+    // public abstract float GetScoreMultiply();
 }

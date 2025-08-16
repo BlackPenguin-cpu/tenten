@@ -108,6 +108,10 @@ public class MainGameLogic : MonoBehaviour
         if (!col.collider || !col.collider.GetComponentInParent<CellBlock>()) return;
         PickBlockSet(col.collider.GetComponentInParent<CellBlock>());
         nowPickBlock.transform.DOScale(2, 0.1f).SetEase(Ease.InOutBounce);
+        foreach (var sr in nowPickBlock.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sr.sortingOrder = 1;
+        }
     }
 
     public void PickBlockSet(CellBlock block)
@@ -172,15 +176,8 @@ public class MainGameLogic : MonoBehaviour
             info.cellInfo.GetComponent<SpriteRenderer>().color = curCell.GetComponent<SpriteRenderer>().color;
             info.cellInfo.GetComponent<SpriteRenderer>().sprite = curCell.GetComponent<SpriteRenderer>().sprite;
 
+            info.cellInfo.OnPlace();
             cellNum++;
-        }
-
-        foreach (var obj in nowPickBlock.cells)
-        {
-            if (obj.TryGetComponent(out Block block))
-            {
-                block.OnPlace(tileMapManager.cellList, TileMapManager.ChangeTilePosToPos(block.transform.position));
-            }
         }
 
         BlockManager.instance.ingameCellBlocks.Remove(nowPickBlock);
@@ -291,35 +288,34 @@ public class MainGameLogic : MonoBehaviour
         gameOverImg.SetActive(true);
     }
 
-    public async UniTask BlockClear(List<Vector2Int> posList)
+    public async UniTask BlockClear(List<Vector2Int> posList, float multiplier = 1.0f)
     {
         var cellInfos = new List<CellInfo>();
         foreach (var pos in posList)
         {
-            if (pos.x < 0 || pos.y < 0 ||pos.x >= 10 || pos.y >= 10) continue;
+            if (pos.x < 0 || pos.y < 0 || pos.x >= 10 || pos.y >= 10) continue;
             cellInfos.Add(CellInfos[pos.x, pos.y]);
         }
 
-        await BlockClear(cellInfos, true);
+        await BlockClear(cellInfos, true, multiplier);
     }
 
-    public async UniTask BlockClear(List<CellInfo> blockList, bool isNonDelay = false)
+    public async UniTask BlockClear(List<CellInfo> blockList, bool isNonDelay = false, float multiplier = 1.0f)
     {
-        float multiplier = 1f;
-
         foreach (var block in blockList)
         {
             if (!block.cellInfo) continue;
             var target = block.cellInfo.transform;
             var curMultiplier = block.cellInfo.GetScoreMultiply();
 
+            target.GetComponent<SpriteRenderer>().sprite = normalBlockSprite;
             ClearBlockAnim(target, 0.2f);
 
             if (!block.isBlockPlaced) continue;
 
             multiplier *= curMultiplier;
-            scoreInfo.score += Mathf.RoundToInt(block.cellInfo.GetBaseScore() * multiplier);
-            if (Mathf.RoundToInt(curMultiplier) != 1)
+            scoreInfo.score += BigInteger.Parse($"{block.cellInfo.GetBaseScore() * multiplier}");
+            if (Mathf.RoundToInt(curMultiplier) > 1 && multiplier > 1)
             {
                 MultiplyTextCreate(target.transform, multiplier);
                 if (!isNonDelay)
@@ -329,11 +325,9 @@ public class MainGameLogic : MonoBehaviour
 
             if (!isNonDelay)
                 await Task.Delay(10);
-            await block.cellInfo.OnClearBlock(tileMapManager.cellList,
-                TileMapManager.ChangeTilePosToPos(target.position));
+            await block.cellInfo.OnClearBlock();
             block.isBlockPlaced = false;
             block.cellInfo.Behaviour = null;
-            target.GetComponent<SpriteRenderer>().sprite = normalBlockSprite;
         }
 
         UIManager.instance.InfoApply(scoreInfo);
