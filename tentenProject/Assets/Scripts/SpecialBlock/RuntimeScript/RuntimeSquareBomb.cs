@@ -35,10 +35,10 @@ public class RuntimeSquareBomb : IBlockRuntime
         distinctPosList.Remove(new Vector2Int(pos.x, pos.y));
 
 
+        await UniTask.Delay(100);
         Object.Instantiate(data.onClearEffect, TileMapManager.ChangePosToTilePos(new Vector2Int(pos.x, pos.y)),
             Quaternion.identity);
         await MainGameLogic.instance.BlockClear(distinctPosList);
-        await UniTask.Delay(400);
     }
 
 

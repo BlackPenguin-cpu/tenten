@@ -42,10 +42,10 @@ public class RuntimeCrossBomb : IBlockRuntime
         var distinctPosList = posList.Distinct().ToList();
         distinctPosList.Remove(new Vector2Int(xPos, yPos));
 
+        await UniTask.Delay(100);
         Object.Instantiate(data.onClearEffect, TileMapManager.ChangePosToTilePos(new Vector2Int(xPos, yPos)),
             Quaternion.identity);
         await MainGameLogic.instance.BlockClear(distinctPosList);
-        await UniTask.Delay(400);
     }
 
 
