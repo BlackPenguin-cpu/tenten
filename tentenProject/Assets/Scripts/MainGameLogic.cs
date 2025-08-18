@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -24,6 +25,7 @@ public class MainGameLogic : MonoBehaviour
     [SerializeField] private GameObject tileMap;
     [SerializeField] private Sprite normalBlockSprite;
     [SerializeField] private TextMeshPro multiplyText;
+    [SerializeField] private Button nextStageButton;
 
     private CellInfo[,] cellInfos;
 
@@ -31,22 +33,23 @@ public class MainGameLogic : MonoBehaviour
     {
         get
         {
-            if (cellInfos == null)
+            if (cellInfos != null) return cellInfos;
+
+            cellInfos = new CellInfo[10, 10];
+            for (int i = 0; i < 10; i++)
             {
-                cellInfos = new CellInfo[10, 10];
-                for (int i = 0; i < 10; i++)
+                for (int j = 0; j < 10; j++)
                 {
-                    for (int j = 0; j < 10; j++)
+                    cellInfos[i, j] = new CellInfo
                     {
-                        cellInfos[i, j] = new CellInfo();
-                        cellInfos[i, j].cellInfo = tileMapManager.cellList[i + j * 10];
-                    }
+                        cellInfo = tileMapManager.cellList[i + j * 10]
+                    };
                 }
             }
 
             return cellInfos;
         }
-        set { cellInfos = value; }
+        private set => cellInfos = value;
     }
 
     public TileMapManager tileMapManager;
@@ -60,7 +63,7 @@ public class MainGameLogic : MonoBehaviour
         public bool isBlockPlaced = false;
     }
 
-    public CellBlock nowPickBlock { get; private set; }
+    public CellBlock NowPickBlock { get; private set; }
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject gameOverImg;
@@ -85,7 +88,7 @@ public class MainGameLogic : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
             BlockPicking();
-        if (nowPickBlock != null)
+        if (NowPickBlock != null)
         {
             if (Input.GetMouseButtonUp(0))
                 TryBlockDrop();
@@ -97,7 +100,7 @@ public class MainGameLogic : MonoBehaviour
     private void BlockMoving()
     {
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        nowPickBlock.transform.position = pos;
+        NowPickBlock.transform.position = pos;
     }
 
     private void BlockPicking()
@@ -107,8 +110,8 @@ public class MainGameLogic : MonoBehaviour
 
         if (!col.collider || !col.collider.GetComponentInParent<CellBlock>()) return;
         PickBlockSet(col.collider.GetComponentInParent<CellBlock>());
-        nowPickBlock.transform.DOScale(2, 0.1f).SetEase(Ease.InOutBounce);
-        foreach (var sr in nowPickBlock.GetComponentsInChildren<SpriteRenderer>())
+        NowPickBlock.transform.DOScale(2, 0.1f).SetEase(Ease.InOutBounce);
+        foreach (var sr in NowPickBlock.GetComponentsInChildren<SpriteRenderer>())
         {
             sr.sortingOrder = 1;
         }
@@ -116,7 +119,7 @@ public class MainGameLogic : MonoBehaviour
 
     public void PickBlockSet(CellBlock block)
     {
-        nowPickBlock = block;
+        NowPickBlock = block;
     }
 
     private void TryBlockDrop()
@@ -134,16 +137,16 @@ public class MainGameLogic : MonoBehaviour
     {
         var col = Physics2D.Raycast(pos, Vector3.forward, 100, 1 << LayerMask.NameToLayer("Tilemap"));
 
-        if (nowPickBlock == null) return false;
+        if (NowPickBlock == null) return false;
         if (col.collider == null)
         {
-            nowPickBlock?.transform.DOKill();
-            CurBlockReset();
+            NowPickBlock?.transform.DOKill();
+            ResetCurPickBlock();
             return false;
         }
 
         var vec = TileMapManager.ChangeTilePosToPos(col.transform.position);
-        var blockVecList = nowPickBlock.GetThisBlockState();
+        var blockVecList = NowPickBlock.GetThisBlockState();
         List<CellInfo> infos = new List<CellInfo>();
 
         foreach (var blockVec in blockVecList)
@@ -153,7 +156,7 @@ public class MainGameLogic : MonoBehaviour
             if (targetPos.x >= 10 || targetPos.y >= 10 || targetPos.x < 0 || targetPos.y < 0
                 || CellInfos[targetPos.x, targetPos.y].isBlockPlaced == true)
             {
-                CurBlockReset();
+                ResetCurPickBlock();
                 return false;
             }
 
@@ -166,8 +169,8 @@ public class MainGameLogic : MonoBehaviour
             info.isBlockPlaced = true;
             scoreInfo.score += 10;
             scoreInfo.cellPlaceCount++;
-            var curCell = nowPickBlock.cells[cellNum];
-            curCell.transform.Rotate(0, 0, nowPickBlock.blockInfo.rotNum * 90);
+            var curCell = NowPickBlock.cells[cellNum];
+            curCell.transform.Rotate(0, 0, NowPickBlock.blockInfo.rotNum * 90);
             if (curCell.TryGetComponent(out Block block))
             {
                 info.cellInfo.Behaviour = block.Behaviour;
@@ -180,9 +183,9 @@ public class MainGameLogic : MonoBehaviour
             cellNum++;
         }
 
-        BlockManager.instance.ingameCellBlocks.Remove(nowPickBlock);
-        Destroy(nowPickBlock.gameObject);
-        nowPickBlock = null;
+        BlockManager.instance.ingameCellBlocks.Remove(NowPickBlock);
+        Destroy(NowPickBlock.gameObject);
+        NowPickBlock = null;
         scoreInfo.blockPlaceCount++;
 
         if (BlockManager.instance.ingameCellBlocks.Count <= 0)
@@ -274,7 +277,8 @@ public class MainGameLogic : MonoBehaviour
             }
         }
 
-        if (isBlockPlacedImpossible)
+        if (isBlockPlacedImpossible ||
+            StageManager.instance.GetCurStageData().canPlaceBlock < blockDropCount)
         {
             GameOver();
             return true;
@@ -290,17 +294,17 @@ public class MainGameLogic : MonoBehaviour
 
     public async UniTask BlockClear(List<Vector2Int> posList, float multiplier = 1.0f)
     {
-        var cellInfos = new List<CellInfo>();
+        var cellList = new List<CellInfo>();
         foreach (var pos in posList)
         {
             if (pos.x < 0 || pos.y < 0 || pos.x >= 10 || pos.y >= 10) continue;
-            cellInfos.Add(CellInfos[pos.x, pos.y]);
+            cellList.Add(CellInfos[pos.x, pos.y]);
         }
 
-        await BlockClear(cellInfos, true, multiplier);
+        await BlockClear(cellList, true, multiplier);
     }
 
-    public async UniTask BlockClear(List<CellInfo> blockList, bool isNonDelay = false, float multiplier = 1.0f)
+    private async UniTask BlockClear(List<CellInfo> blockList, bool isNonDelay = false, float multiplier = 1.0f)
     {
         foreach (var block in blockList)
         {
@@ -330,6 +334,14 @@ public class MainGameLogic : MonoBehaviour
             block.cellInfo.Behaviour = null;
         }
 
+        var curStageData = StageManager.instance.GetCurStageData();
+        if (curStageData.targetScore <= scoreInfo.score &&
+            curStageData.canPlaceBlock >= blockDropCount)
+        {
+            //다음 스테이지로
+            nextStageButton.gameObject.SetActive(true);
+        }
+
         UIManager.instance.InfoApply(scoreInfo);
     }
 
@@ -353,26 +365,31 @@ public class MainGameLogic : MonoBehaviour
         text.text = $" {Mathf.Round(multiplier * 10) / 10}x";
     }
 
-    private void CurBlockReset()
+    private void ResetCurPickBlock()
     {
-        nowPickBlock.transform.localPosition = Vector3.zero;
-        nowPickBlock.transform.localScale = Vector3.one;
-        nowPickBlock = null;
+        NowPickBlock.transform.localPosition = Vector3.zero;
+        NowPickBlock.transform.localScale = Vector3.one;
+        NowPickBlock = null;
     }
 
     public void GameReset()
     {
         blockDropCount = 0;
         //Tilemap CellInfo Reset
-        foreach (var tile in tileMapManager.cellList)
+        foreach (var cell in CellInfos)
         {
-            tile.GetComponent<SpriteRenderer>().color = Color.white;
+            cell.isBlockPlaced = false;
+            cell.cellInfo.GetComponent<SpriteRenderer>().color = Color.white;
+            cell.cellInfo.GetComponent<SpriteRenderer>().sprite = normalBlockSprite;
+            cell.cellInfo.OnClearBlock();
+            cell.cellInfo.Behaviour = null;
         }
 
         CellInfos = null;
 
         //ScoreInfo Reset
         scoreInfo = new ScoreInfo();
+        UIManager.instance.InfoApply(scoreInfo);
 
         //ingameCellBlock Reset    
         BlockManager.instance.blockQueue.Clear();
@@ -384,7 +401,9 @@ public class MainGameLogic : MonoBehaviour
         BlockManager.instance.ingameCellBlocks.Clear();
         BlockManager.instance.BlockRefill();
 
+
         //GameOver UI Active false
         gameOverImg.SetActive(false);
+        nextStageButton.gameObject.SetActive(false);
     }
 }
