@@ -3,11 +3,19 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public class CellBlockDescInfo
+{
+    public string name;
+    public string desc;
+    public string blockInfos;
+}
+
 public class CellBlock : MonoBehaviour
 {
     public Color curColor;
     public BlockInfo blockInfo;
-    public List<GameObject> cells = new List<GameObject>();
+    public List<Block> cells;
+    public BlockInfoSO blockInfoSO;
 
     [SerializeField] private GameObject cellParent;
 
@@ -15,6 +23,7 @@ public class CellBlock : MonoBehaviour
     {
         GetCells();
     }
+
     private void Start()
     {
         SetBlockColor();
@@ -42,13 +51,31 @@ public class CellBlock : MonoBehaviour
             .ToList();
     }
 
+    public CellBlockDescInfo GetBlockDesc()
+    {
+        var returnDesc = new CellBlockDescInfo();
+
+        returnDesc.name = blockInfoSO.name;
+        returnDesc.desc = blockInfoSO.description;
+
+        var infoStr = "";
+        var curCells = cells.Select(cell => cell.Behaviour).ToList();
+
+        var blocks = curCells.Distinct().ToList();
+        infoStr += blocks.Select(info => $"{info.name} : {info.description}\n");
+
+        returnDesc.blockInfos = infoStr;
+        
+        return returnDesc;
+    }
+
     [ContextMenu("GetCells")]
     private void GetCells()
     {
-        cells = new List<GameObject>();
+        cells = new List<Block>();
         for (int i = 0; i < cellParent.transform.childCount; i++)
         {
-            cells.Add(cellParent.transform.GetChild(i).gameObject);
+            cells.Add(cellParent.transform.GetComponent<Block>());
         }
     }
 

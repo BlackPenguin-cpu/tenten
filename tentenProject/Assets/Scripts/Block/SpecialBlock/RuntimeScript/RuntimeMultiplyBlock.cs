@@ -23,6 +23,7 @@ public class RuntimeMultiplyBlock : IBlockRuntime
         await UniTask.Delay(10);
     }
 
+
     public float GetScoreMultiply()
     {
         return block.multiply;

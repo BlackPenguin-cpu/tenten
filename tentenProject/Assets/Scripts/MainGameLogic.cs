@@ -171,11 +171,8 @@ public class MainGameLogic : MonoBehaviour
             scoreInfo.cellPlaceCount++;
             var curCell = NowPickBlock.cells[cellNum];
             curCell.transform.Rotate(0, 0, NowPickBlock.blockInfo.rotNum * 90);
-            if (curCell.TryGetComponent(out Block block))
-            {
-                info.cellInfo.Behaviour = block.Behaviour;
-            }
 
+            info.cellInfo.Behaviour = curCell.Behaviour;
             info.cellInfo.GetComponent<SpriteRenderer>().color = curCell.GetComponent<SpriteRenderer>().color;
             info.cellInfo.GetComponent<SpriteRenderer>().sprite = curCell.GetComponent<SpriteRenderer>().sprite;
 
@@ -381,7 +378,11 @@ public class MainGameLogic : MonoBehaviour
             cell.isBlockPlaced = false;
             cell.cellInfo.GetComponent<SpriteRenderer>().color = Color.white;
             cell.cellInfo.GetComponent<SpriteRenderer>().sprite = normalBlockSprite;
-            cell.cellInfo.OnClearBlock();
+            if (cell.cellInfo._runtimeBlock is IBlockHaveCleanEffect effect)
+            {
+                effect.EffectClean();
+            }
+
             cell.cellInfo.Behaviour = null;
         }
 
@@ -400,7 +401,6 @@ public class MainGameLogic : MonoBehaviour
 
         BlockManager.instance.ingameCellBlocks.Clear();
         BlockManager.instance.BlockRefill();
-
 
         //GameOver UI Active false
         gameOverImg.SetActive(false);

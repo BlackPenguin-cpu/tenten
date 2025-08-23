@@ -8,7 +8,7 @@ public class Block : MonoBehaviour
     public Vector2Int pos;
     public bool alreadyUsed = false;
     [SerializeField] private BlockBase _behaviour;
-    private IBlockRuntime _runtimeBlock;
+    public IBlockRuntime _runtimeBlock;
 
     public BlockBase Behaviour
     {

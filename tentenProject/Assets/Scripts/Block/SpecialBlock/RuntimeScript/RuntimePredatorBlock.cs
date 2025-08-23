@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class RuntimePredatorBlock : IBlockRuntime
+public class RuntimePredatorBlock : IBlockRuntime, IBlockHaveCleanEffect
 {
     private readonly PredatorBlock data;
     private TMPro.TextMeshPro instText;
@@ -46,9 +46,14 @@ public class RuntimePredatorBlock : IBlockRuntime
 
     public async UniTask OnClear(Vector2Int pos)
     {
-        Object.Destroy(instText?.gameObject);
+        EffectClean();
         await UniTask.CompletedTask;
     }
 
     public float GetScoreMultiply() => predatorCount;
+
+    public void EffectClean()
+    {
+        Object.Destroy(instText?.gameObject);
+    }
 }

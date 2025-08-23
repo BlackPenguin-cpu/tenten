@@ -25,8 +25,6 @@ public abstract class BlockBase : ScriptableObject
     public GameObject onClearEffect;
     public string cellName;
     public string description;
-    public EBlockCellRank cellRank;
-    public EBlockType cellType;
     public float baseScore = 50f;
 
     public abstract IBlockRuntime CreateRuntime();

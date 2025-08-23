@@ -11,7 +11,7 @@ public class StageDataClass
 {
     public int stageNum;
     public int chapterNum;
-    public int targetScore;
+    public BigInteger targetScore;
     public int canPlaceBlock;
 }
 
@@ -70,6 +70,9 @@ public class ReadSpreadSheet : MonoBehaviour
 
                 else if (type == typeof(string))
                     fields[i].SetValue(data, datas[i]);
+                
+                else if (type == typeof(BigInteger))
+                    fields[i].SetValue(data, BigInteger.Parse(datas[i]));
 
                 // enum
                 else

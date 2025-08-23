@@ -8,3 +8,8 @@ public interface IBlockRuntime
     UniTask OnClear(Vector2Int pos);
     float GetScoreMultiply();
 }
+
+public interface IBlockHaveCleanEffect
+{
+    void EffectClean();
+}

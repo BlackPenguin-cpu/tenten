@@ -6,7 +6,7 @@ using UnityEngine;
 public class RuntimeCrossBomb : IBlockRuntime
 {
     private readonly CrossBomb data;
-
+    
     public RuntimeCrossBomb(CrossBomb data)
     {
         this.data = data;
